@@ -1,5 +1,41 @@
 import java.util.Scanner;
 public class Easy {
+
+    public int dollars;
+    public int cents;
+
+    public Easy(int d, int c) {
+        this.dollars = d;
+        this.cents = c;
+    }
+
+    public static int centsChecker(String check){
+        int cents = 0;
+
+        if(check.contains(".")) {
+            String[] split = check.split("\\.");
+
+            cents = Integer.valueOf(split[1]);
+            while (cents > 99 || cents < 0 || dollars < 0)  {
+                System.out.println("Please re-enter a new total");
+                purchase = readIn.nextLine();
+
+                if (purchase.contains(".")) {
+                    purchaseSplit = purchase.split("\\.");
+
+                    dollars = Integer.valueOf(purchaseSplit[0]);
+                    cents = Integer.valueOf(purchaseSplit[1]);
+
+                } else {
+                    dollars = Integer.valueOf(purchase);
+                    cents = 0;
+                }
+            }
+        } else{
+            return 0;
+        }
+
+    }
     public static void main(String[] args){
 
         Scanner readIn = new Scanner(System.in);
@@ -7,13 +43,15 @@ public class Easy {
         int cents = 0;
         int temp = 0;
         String purchase;
+        String given;
+
+
 
 
         System.out.println("Welcome to S4_ChangeComputation \n" +
                 "Please enter in the total price of all the items.");
 
         purchase = readIn.nextLine();
-
 
 
 
@@ -41,6 +79,36 @@ public class Easy {
         } else{
             dollars = Integer.valueOf(purchase);
         }
+
+        System.out.println("\nPlease enter how much you have gave the cashier");
+
+        given = readIn.nextLine();
+
+        if(purchase.contains(".")) {
+            String[] purchaseSplit = purchase.split("\\.");
+
+            dollars = Integer.valueOf(purchaseSplit[0]);
+            cents = Integer.valueOf(purchaseSplit[1]);
+            while (cents > 99 || cents < 0 || dollars < 0)  {
+                System.out.println("Please re-enter a new total");
+                purchase = readIn.nextLine();
+
+                if (purchase.contains(".")) {
+                    purchaseSplit = purchase.split("\\.");
+
+                    dollars = Integer.valueOf(purchaseSplit[0]);
+                    cents = Integer.valueOf(purchaseSplit[1]);
+
+                } else {
+                    dollars = Integer.valueOf(purchase);
+                    cents = 0;
+                }
+            }
+
+        } else{
+            dollars = Integer.valueOf(purchase);
+        }
+
 
         if(dollars/20 > 0){
             System.out.println("20's: " + dollars/20);

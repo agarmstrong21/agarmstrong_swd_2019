@@ -9,7 +9,7 @@ public class DrawSmiley extends JPanel {
         super.paintComponent(g);
 
         // draw the face
-        g.setColor(Color.YELLOW);
+        g.setColor(Color.RED);
         g.fillOval(10, 10, 200, 200);
 
         // draw the eyes
@@ -21,7 +21,7 @@ public class DrawSmiley extends JPanel {
         g.fillOval(50, 110, 120, 60);
 
         // "touch up" the mouth into a smile
-        g.setColor(Color.YELLOW);
+        g.setColor(Color.RED);
         g.fillRect(50, 110, 120, 30);
         g.fillOval(50, 120, 120, 40);
     }
