@@ -9,6 +9,47 @@ public class Easy {
         this.cents = c;
     }
 
+    public static void main(String[] args){
+        Scanner readIn = new Scanner(System.in);
+        String totalString;
+        String givenString;
+        Easy total = new Easy(0,0);
+        Easy given = new Easy(0,0);
+
+        System.out.println("Welcome to S4_ChangeComputation Made by Addison Armstrong" +
+                " in Intro to Digital Design \n" +
+                "Please enter in the total price of all the items.");
+        totalString = readIn.nextLine();
+        total = moneyChecker(totalString);
+
+        System.out.println("Please enter how much you have gave the cashier");
+        givenString = readIn.nextLine();
+        given = moneyChecker(givenString);
+
+        if(total.cents < 10){
+            System.out.println("Total: " + total.dollars + ".0" + total.cents);
+        }
+        else{
+            System.out.println("Total: " + total.dollars + "." + total.cents);
+        }
+
+        if(given.cents < 10){
+            System.out.println("Cash Given: " + given.dollars + ".0" + given.cents);
+        }
+        else{
+            System.out.println("Cash Given: " + given.dollars + "." + given.cents);
+        }
+
+        given = difference(total, given);
+
+        if(given.cents < 10){
+            System.out.println("Change Given: " + given.dollars + ".0" + given.cents);
+        }
+        else{
+            System.out.println("Change Given: " + given.dollars + "." + given.cents);
+        }
+        change(given);
+    }
     private static Easy moneyChecker(String check){
         Easy checkTotal = new Easy(0,0);
         Scanner readIn = new Scanner(System.in);
@@ -79,47 +120,4 @@ public class Easy {
             change.cents -= temp*centArray[i];
         }
     }
-    public static void main(String[] args){
-        Scanner readIn = new Scanner(System.in);
-        String totalString;
-        String givenString;
-        Easy total = new Easy(0,0);
-        Easy given = new Easy(0,0);
-
-        System.out.println("Welcome to S4_ChangeComputation Made by Addison Armstrong" +
-                " in Intro to Digital Design \n" +
-                "Please enter in the total price of all the items.");
-        totalString = readIn.nextLine();
-        total = moneyChecker(totalString);
-
-        System.out.println("Please enter how much you have gave the cashier");
-        givenString = readIn.nextLine();
-        given = moneyChecker(givenString);
-
-        if(total.cents < 10){
-            System.out.println("Total: " + total.dollars + ".0" + total.cents);
-        }
-        else{
-            System.out.println("Total: " + total.dollars + "." + total.cents);
-        }
-
-        if(given.cents < 10){
-            System.out.println("Cash Given: " + given.dollars + ".0" + given.cents);
-        }
-        else{
-            System.out.println("Cash Given: " + given.dollars + "." + given.cents);
-        }
-
-        given = difference(total, given);
-
-        if(given.cents < 10){
-            System.out.println("Change Given: " + given.dollars + ".0" + given.cents);
-        }
-        else{
-            System.out.println("Change Given: " + given.dollars + "." + given.cents);
-        }
-        change(given);
-
-    }
-
 }
