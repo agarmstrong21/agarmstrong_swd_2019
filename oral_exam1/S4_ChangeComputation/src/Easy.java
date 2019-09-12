@@ -1,4 +1,7 @@
+import org.graalvm.compiler.replacements.nodes.arithmetic.IntegerAddExactNode;
+
 import java.util.Scanner;
+
 public class Easy {
 
     private int dollars;
@@ -14,17 +17,24 @@ public class Easy {
         String totalString;
         String givenString;
         Easy total = new Easy(0,0);
-        Easy given = new Easy(0,0);
+        Easy given = total;
+
+
 
         System.out.println("Welcome to S4_ChangeComputation Made by Addison Armstrong" +
                 " in Intro to Digital Design \n" +
                 "Please enter in the total price of all the items.");
         totalString = readIn.nextLine();
-        total = moneyChecker(totalString);
+        total = totalChecker(totalString);
 
-        System.out.println("Please enter how much you have gave the cashier");
-        givenString = readIn.nextLine();
-        given = moneyChecker(givenString);
+        System.out.println("Please enter the bills and the cents that is given to the cashier.");
+        while(total.dollars > given.dollars || !(total.dollars == given.dollars && total.cents < given.cents)) {
+            givenString = readIn.nextLine();
+            if(givenString.contains(".")){
+
+            }
+            given = totalChecker(givenString);
+        }
 
         if(total.cents < 10){
             System.out.println("Total: " + total.dollars + ".0" + total.cents);
@@ -50,7 +60,7 @@ public class Easy {
         }
         change(given);
     }
-    private static Easy moneyChecker(String check){
+    private static Easy totalChecker(String check){
         Easy checkTotal = new Easy(0,0);
         Scanner readIn = new Scanner(System.in);
 
@@ -80,6 +90,44 @@ public class Easy {
         return checkTotal;
     }
 
+    private static int givenChecker(String check){
+        Scanner readIn = new Scanner(System.in);
+        int[] centArray = new int[] {25, 10, 5, 1};
+        int[] dollarArray = new int[] {20,10,5,1};
+        boolean temp = false;
+
+        if(!check.contains(".")){
+            while(temp) {
+                for (int i = 1; i < dollarArray.length; i++) {
+                    if (dollarArray[i] == Integer.parseInt(check)) {
+                        return Integer.parseInt(check);
+                    }
+                }
+                System.out.println("Sorry but that is not a valid bill. Please enter a correct bill");
+                check = readIn.nextLine();
+            }
+        }
+        else{
+            while(temp){
+                for(int i = 1; i < centArray.length; i++){
+                    if(centArray[i] == 25 || centArray[i] == 10){
+                        if(centArray[i] == Integer.parseInt(check)){
+                            return Integer.parseInt(check);
+                        }
+                    }
+                    else{
+                        if(centArray[i] ==  )
+
+                    }
+                }
+                System.out.println("Sorry but that is not a valid coin. Please enter a correct coin");
+                check = readIn.nextLine();
+            }
+        }
+
+
+    }
+
     private static Easy difference(Easy total, Easy given){
         Scanner readIn = new Scanner(System.in);
         String cash;
@@ -89,7 +137,7 @@ public class Easy {
             System.out.println("You did not give enough to pay for the total." +
                     "\n Please enter in cash given.");
             cash = readIn.nextLine();
-            given = moneyChecker(cash);
+            given = totalChecker(cash);
         }
 
         if(given.cents < total.cents){
