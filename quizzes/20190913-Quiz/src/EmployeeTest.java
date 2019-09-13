@@ -9,6 +9,10 @@ public class EmployeeTest {
 
         System.out.println(employee);
 
+        hire.setDate(5, 12, 1989);
+
+        System.out.println(employee);
+
     }
 } // end class EmployeeTest
 
