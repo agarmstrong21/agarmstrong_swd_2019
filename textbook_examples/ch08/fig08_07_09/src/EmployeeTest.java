@@ -1,6 +1,8 @@
 // Fig. 8.9: EmployeeTest.java
 // Composition demonstration.
 
+import java.util.Date;
+
 public class EmployeeTest {
     public static void main(String[] args) {
         Date birth = new Date(7, 24, 1949);
