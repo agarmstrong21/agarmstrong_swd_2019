@@ -12,7 +12,7 @@ public class EasyTest {
                 " in Intro to Digital Design \n" +
                 "Please enter in the total price of all the items.");
         totalString = total.stringChecker(readIn.nextLine());
-        total = total.totalChecker(totalString);
+        total.totalChecker(totalString);
 
         System.out.println("Please enter the number of bills (20,10,5,1) and coins (.25, .10, .05, .01) " +
                 "that will be given to the cashier.");

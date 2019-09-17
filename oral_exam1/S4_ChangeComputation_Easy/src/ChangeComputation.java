@@ -1,4 +1,3 @@
-import java.util.Random;
 import java.util.Scanner;
 
 //Comments to ask TA's:
@@ -6,7 +5,7 @@ import java.util.Scanner;
 //how can I have two seperate classes and make my objects private?
 
 public class ChangeComputation {
-    private Random rdmInt = new Random();
+
     private Scanner readIn = new Scanner(System.in);
 
     private int dollars, cents, twenties, tens, fives, ones,
@@ -26,6 +25,19 @@ public class ChangeComputation {
         this.pennies = 0;
     }
 
+    public ChangeComputation (int d, int c, int T, int t, int f, int o, int q, int D, int n, int p){
+        this.dollars = d;
+        this.cents = c;
+        this.twenties = T;
+        this.tens = t;
+        this.fives = f;
+        this.ones = o;
+        this.quarters = q;
+        this.dimes = D;
+        this.nickels = n;
+        this.pennies = p;
+    }
+
 
 
     public String stringChecker(String str){
@@ -37,8 +49,7 @@ public class ChangeComputation {
     }
 
 
-    public ChangeComputation totalChecker(String check) {
-        ChangeComputation checkTotal = new ChangeComputation(0, 0);
+    public void totalChecker(String check) {
         boolean temp = true;
 
         while (temp) {
@@ -46,13 +57,13 @@ public class ChangeComputation {
                 if (check.contains(".")) {
                     String[] checkSplit = check.split("\\.");
                     if(Integer.parseInt(checkSplit[1]) <100) {
-                        checkTotal.dollars = Integer.parseInt(0 + checkSplit[0]);
-                        checkTotal.cents = Integer.parseInt(checkSplit[1]);
+                        this.dollars = Integer.parseInt(0 + checkSplit[0]);
+                        this.cents = Integer.parseInt(checkSplit[1]);
                         temp = false;
                     }
                 } else {
-                    checkTotal.dollars = Integer.parseInt(check);
-                    checkTotal.cents = 0;
+                    this.dollars = Integer.parseInt(check);
+                    this.cents = 0;
                     temp = false;
                 }
             }
@@ -61,7 +72,6 @@ public class ChangeComputation {
                 check = stringChecker(readIn.nextLine());
             }
         }
-        return checkTotal;
     }
 
     public void getMoney(ChangeComputation total){
@@ -168,7 +178,7 @@ public class ChangeComputation {
         if(given.dollars/20 > 0 && this.twenties != 0){
             temp = given.dollars/20;
             for(int i = 0; i <= temp; i++){
-                if(twenties != 0){
+                if(this.twenties != 0){
                     given.dollars -= 20;
                     given.twenties ++;
                     this.twenties --;
@@ -178,38 +188,78 @@ public class ChangeComputation {
         }
         if(given.dollars/10 > 0 && given.dollars/10 < this.tens){
             temp = given.dollars/10;
-            given.dollars-= temp*10;
-            given.tens += temp;
+            for(int i = 0; i <= temp; i++){
+                if(this.tens != 0){
+                    given.dollars -= 10;
+                    given.tens ++;
+                    this.tens --;
+                }
+            }
         }
         if(given.dollars/5 > 0 && given.dollars/5 < this.fives){
             temp = given.dollars/5;
-            given.dollars -= temp*5;
-            given.fives += temp;
+            for(int i = 0; i <= temp; i++){
+                if(this.fives != 0){
+                    given.dollars -= 5;
+                    given.fives ++;
+                    this.fives --;
+                }
+            }
         }
         if(given.dollars > 0 && given.dollars < this.ones){
             temp = given.dollars;
-            given.dollars -= temp;
-            given.ones += temp;
+            for(int i = 0; i <= temp; i++){
+                if(this.ones != 0){
+                    given.dollars -= 1;
+                    given.ones ++;
+                    this.ones --;
+                }
+            }
         }
-        if(given.cents/25 > 0){
+        if(given.cents/25 > 0 && this.quarters > 0){
             temp = given.cents/25;
-            given.cents -= temp*25;
-            given.quarters += temp;
+            for(int i = 0; i <= temp; i++){
+                if(this.quarters != 0){
+                    given.cents -= 25;
+                    given.quarters ++;
+                    this.quarters --;
+                }
+            }
         }
-        if(given.cents/10 > 0){
+        if(given.cents/10 > 0 && this.dimes > 0){
             temp = given.cents/10;
-            given.cents -= temp*10;
-            given.dimes += temp;
+            for(int i = 0; i <= temp; i++){
+                if(this.dimes != 0){
+                    given.cents -= 10;
+                    given.dimes ++;
+                    this.dimes --;
+                }
+            }
         }
-        if(given.cents/5 > 0){
+        if(given.cents/5 > 0 && this.nickels > 0){
             temp = given.cents/5;
-            given.cents -= temp*5;
-            given.nickels += temp;
+            for(int i = 0; i <= temp; i++){
+                if(this.nickels != 0){
+                    given.cents -= 5;
+                    given.nickels ++;
+                    this.nickels --;
+                }
+            }
         }
-        if(given.cents > 0){
+        if(given.cents > 0 && this.pennies > 0){
             temp = given.cents;
-            given.cents -= temp;
-            given.pennies += temp;
+            for(int i = 0; i <= temp; i++){
+                if(this.pennies != 0){
+                    given.cents -= 1;
+                    given.pennies ++;
+                    this.pennies --;
+                }
+            }
+        }
+
+        if(given.dollars > 0 || given.cents > 0){
+            System.out.println("The drawer does not have enough money to complete Transaction.");
+            System.exit(0);
         }
 
         return given;
@@ -234,20 +284,6 @@ public class ChangeComputation {
         }
     }
 
-    public void drawer(ChangeComputation given){
-        this.twenties = rdmInt.nextInt(15) + given.twenties;
-        this.tens = rdmInt.nextInt(15) + given.tens;
-        this.fives = rdmInt.nextInt(15) + given.fives;
-        this.ones = rdmInt.nextInt(15) + given.ones;
-        this.quarters = rdmInt.nextInt(15) + given.quarters;
-        this.dimes = rdmInt.nextInt(15) + given.dimes;
-        this.nickels = rdmInt.nextInt(15) + given.nickels;
-        this.pennies = rdmInt.nextInt(15) + given.pennies;
-
-
-
-    }
-
     public void change(){
         System.out.println("20's: " + this.twenties);
         System.out.println("10's: " + this.tens);
@@ -257,5 +293,16 @@ public class ChangeComputation {
         System.out.println(".10's: " + this.dimes);
         System.out.println(".05's: " + this.nickels);
         System.out.println(".01's: " + this.pennies);
+    }
+
+    public void addToDrawer (ChangeComputation given){
+        this.twenties += given.twenties;
+        this.tens += given.tens;
+        this.fives += given.fives;
+        this.ones += given.ones;
+        this.quarters += given.quarters;
+        this.dimes += given.dimes;
+        this.nickels += given.nickels;
+        this.pennies += given.pennies;
     }
 }
