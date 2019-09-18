@@ -1,8 +1,10 @@
 import java.util.Scanner;
 
-//Comments to ask TA's:
-//should I have two seperate classes? Can I put them all into one?
-//how can I have two seperate classes and make my objects private?
+//Comments to ask TA's
+//Hot to do java docs
+//review over these and see if they will suffice
+
+
 
 public class ChangeComputation {
 
