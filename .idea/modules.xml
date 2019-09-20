@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/quizzes/20190904_Quiz/20190904_Quiz.iml" filepath="$PROJECT_DIR$/quizzes/20190904_Quiz/20190904_Quiz.iml" />
       <module fileurl="file://$PROJECT_DIR$/quizzes/20190913-Quiz/20190913-Quiz.iml" filepath="$PROJECT_DIR$/quizzes/20190913-Quiz/20190913-Quiz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/quizzes/20190920-Quiz/20190920-Quiz.iml" filepath="$PROJECT_DIR$/quizzes/20190920-Quiz/20190920-Quiz.iml" />
       <module fileurl="file://$PROJECT_DIR$/textbook_examples/MVCCalculatorExamples/EXAMPLE_MVCCalculator1/EXAMPLE_MVCCalculator1.iml" filepath="$PROJECT_DIR$/textbook_examples/MVCCalculatorExamples/EXAMPLE_MVCCalculator1/EXAMPLE_MVCCalculator1.iml" />
       <module fileurl="file://$PROJECT_DIR$/textbook_examples/MVCCalculatorExamples/EXAMPLE_MVCCalculator2/EXAMPLE_MVCCalculator2.iml" filepath="$PROJECT_DIR$/textbook_examples/MVCCalculatorExamples/EXAMPLE_MVCCalculator2/EXAMPLE_MVCCalculator2.iml" />
       <module fileurl="file://$PROJECT_DIR$/textbook_examples/MVCCalculatorExamples/EXAMPLE_MVCCalculator3/EXAMPLE_MVCCalculator3.iml" filepath="$PROJECT_DIR$/textbook_examples/MVCCalculatorExamples/EXAMPLE_MVCCalculator3/EXAMPLE_MVCCalculator3.iml" />
@@ -56,8 +57,9 @@
       <module fileurl="file://$PROJECT_DIR$/textbook_examples/supplemental/HelloWorld/HelloWorld.iml" filepath="$PROJECT_DIR$/textbook_examples/supplemental/HelloWorld/HelloWorld.iml" />
       <module fileurl="file://$PROJECT_DIR$/textbook_examples/supplemental/JUnitExample/JUnitExample.iml" filepath="$PROJECT_DIR$/textbook_examples/supplemental/JUnitExample/JUnitExample.iml" />
       <module fileurl="file://$PROJECT_DIR$/textbook_examples/MVCCalculatorExamples/MVCCalculatorExamples.iml" filepath="$PROJECT_DIR$/textbook_examples/MVCCalculatorExamples/MVCCalculatorExamples.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oral_exam1/S27_MachineLearning_Hard/S27_MachineLearning_Hard.iml" filepath="$PROJECT_DIR$/oral_exam1/S27_MachineLearning_Hard/S27_MachineLearning_Hard.iml" />
       <module fileurl="file://$PROJECT_DIR$/oral_exam1/S4_ChangeComputation.iml" filepath="$PROJECT_DIR$/oral_exam1/S4_ChangeComputation.iml" />
-      <module fileurl="file://$PROJECT_DIR$/S4_ChangeComputation_Easy/S4_ChangeComputation_Easy.iml" filepath="$PROJECT_DIR$/S4_ChangeComputation_Easy/S4_ChangeComputation_Easy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/S4_ChangeComputation_Medium/S4_ChangeComputation_Easy.iml" filepath="$PROJECT_DIR$/S4_ChangeComputation_Medium/S4_ChangeComputation_Easy.iml" />
       <module fileurl="file://$PROJECT_DIR$/textbook_examples/ch15/SerializationApps/SerializationApps.iml" filepath="$PROJECT_DIR$/textbook_examples/ch15/SerializationApps/SerializationApps.iml" />
       <module fileurl="file://$PROJECT_DIR$/textbook_examples/supplemental/SupermarketSimulation/SupermarketSimulation.iml" filepath="$PROJECT_DIR$/textbook_examples/supplemental/SupermarketSimulation/SupermarketSimulation.iml" />
       <module fileurl="file://$PROJECT_DIR$/textbook_examples/ch15/TextFileApps/TextFileApps.iml" filepath="$PROJECT_DIR$/textbook_examples/ch15/TextFileApps/TextFileApps.iml" />

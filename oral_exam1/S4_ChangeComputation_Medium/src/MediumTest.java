@@ -54,7 +54,7 @@ public class MediumTest {
             }
         }
         catch(Exception ex){
-            System.out.println("There was an exception that occurred. Please try again.");
+            System.out.println("There was an exception that occured. Please try again.");
         }
     }
 }
