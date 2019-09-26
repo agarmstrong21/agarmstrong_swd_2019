@@ -33,7 +33,7 @@ public class MachineLearning {
         }
         return countError;
     }
-
+git
     public double Euclidean_Distance(double[] a, double[] b){
         if(a.length != b.length){
             throw new IllegalArgumentException("Inputted vectors are not the same length. Please try again");
