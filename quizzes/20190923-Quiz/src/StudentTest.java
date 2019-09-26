@@ -27,7 +27,7 @@ public class StudentTest {
     }
 
     @ParameterizedTest(name="run #{index} with [{arguments}]")
-    @CsvSource({"95,A" , "90,A" , "89,B" , "-13,F"})
+    @CsvSource({"95,A" , "90,A" , "89,B" , "13,F"})
     void getLetterGrade(double grade, String letter) {
         myStudent.setAverage(grade);
         assertEquals(letter, myStudent.getLetterGrade());
