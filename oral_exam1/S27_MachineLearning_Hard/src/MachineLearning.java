@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class MachineLearning {
 
     public double Cosine_Similarity(double[] a, double[] b){
@@ -33,7 +37,7 @@ public class MachineLearning {
         }
         return countError;
     }
-git
+
     public double Euclidean_Distance(double[] a, double[] b){
         if(a.length != b.length){
             throw new IllegalArgumentException("Inputted vectors are not the same length. Please try again");
@@ -43,6 +47,22 @@ git
             distance += Math.pow(b[i] - a[i], 2);
         }
         return Math.sqrt(distance);
+    }
+
+    public double kNearestNeighbor(File file, double[] a, int k){
+        //creating File instance to reference text file in Java
+        File text = new File("C:/temp/test.txt");
+
+        //Creating Scanner instnace to read File in Java
+        Scanner scnr = new Scanner(text);
+
+        //Reading each line of file using Scanner class
+        int lineNumber = 1;
+        while(scnr.hasNextLine()){
+            String line = scnr.nextLine();
+            System.out.println("line " + lineNumber + " :" + line);
+            lineNumber++;
+        }
     }
 
 
