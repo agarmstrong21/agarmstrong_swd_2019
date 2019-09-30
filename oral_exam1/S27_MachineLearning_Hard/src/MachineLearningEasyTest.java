@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MachineLearningEasyTest extends MachineLearning {
@@ -153,5 +155,15 @@ class MachineLearningEasyTest extends MachineLearning {
             String b = ("101010000001010101010111010101010100011");
 
             assertEquals(8.0, Hamming_Distance(a, b));
+        }
+
+        // Kth-Nearest Tests
+
+        @Test void ktest() throws FileNotFoundException {
+            String file = "C:\\Users\\addis\\OneDrive\\Documents\\Intro to Software Design\\agarmstrong_swd\\oral_exam1\\S27_MachineLearning_Hard\\src\\S27-MLMedium.csv";
+            double[]a = {0};
+            int k = 0;
+            double y = 0;
+            y = kNearestNeighbor(file, a, k);
         }
 }
