@@ -55,7 +55,7 @@ public class MachineLearning {
         return Math.sqrt(distance);
     }
 
-    public double kNearestNeighbor(String file, double[] a, int k) throws FileNotFoundException {
+    public double kNearestNeighbor(String file, double[] a, int k) throws FileNotFoundException  {
         //Checking if csv array length is same as double[] a length
         if(a.length != 5){ //TODO figure out how to get length of readin strings
             throw new IllegalArgumentException("Inputted vectors are not the same length. Please try again");
@@ -73,24 +73,58 @@ public class MachineLearning {
             rows++;
         }
 
+        //Array to hold all Euclidean Distances
+        double[] eucildeanDisClass1 = new double[rows/2];
+        double[] eucildeanDisClass3 = new double[rows/2];
+
         //Creating a 3D array with Double[] and string
-        Double[][] twod = new Double[rows][5]; //TODO find how to figure out length of array from readin file (String.token)
+        Double[][] twoD1 = new Double[rows/2][5]; //TODO find how to figure out length of array from readin file (String.token)
+        Double[][] twoD2 = new Double[rows/2][5];
+
         //Reading each line of file using Scanner class
         int lineNumber = 1;
+        int lineNumber1 = 1;
+        int lineNumber2 = 1;
+
         while(scan.hasNextLine()){
             String line = scan.nextLine();
             System.out.println("line " + lineNumber + " :" + line);
 
-            for(int i = 0; i < 5; i++){
-                String[] splitLine = line.split(",");
-                twod[lineNumber][i] = Double.parseDouble(splitLine[i]);
+            if(line.contains("class1")) {
+                for (int i = 0; i < 5; i++) {
+                    String[] splitLine = line.split(",");
+                    twoD1[lineNumber2][i] = Double.parseDouble(splitLine[i]);
+                }
+                lineNumber1++;
+            }
+
+            if(line.contains("class2")){
+                for(int i = 0; i < 5; i++){
+                    String[] splitLine = line.split(",");
+                    twoD2[lineNumber1 ][i] = Double.parseDouble(splitLine[i]);
+                }
+                lineNumber2++;
             }
             lineNumber++;
-
-            Double.compare(a[0], twod)
         }
+
+
+        //For loop to find all euclidean distances
+
+        a[1] = twoD1[1];
+
+        for(int i = 0; i < rows/2; i++){
+            eucildeanDisClass1[i] = Euclidean_Distance(twoD1[i], a);
+        }
+
+
         return 0;
     }
 
+
+    class doubleObject{
+        int size = 0;
+
+    }
 
 }
