@@ -4,9 +4,9 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
+import java.util.Vector;
 
 public class MachineLearning {
 
@@ -56,10 +56,8 @@ public class MachineLearning {
     }
 
     public double kNearestNeighbor(String file, double[] a, int k) throws FileNotFoundException  {
-        //Checking if csv array length is same as double[] a length
-        if(a.length != 5){ //TODO figure out how to get length of readin strings
-            throw new IllegalArgumentException("Inputted vectors are not the same length. Please try again");
-        }
+        //Vector variable to store kNearestHelper objects
+        Vector<kNearestHelper> kVector = new Vector<>();
 
         //creating File instance to reference text file in Java
         File text = new File(file);
@@ -67,64 +65,115 @@ public class MachineLearning {
         //Creating Scanner instance to read File in Java
         Scanner scan = new Scanner(text);
 
-        //Counting how many rows there are
-        int rows = 0;
-        while(scan.hasNextLine()){
-            rows++;
-        }
-
-        //Array to hold all Euclidean Distances
-        double[] eucildeanDisClass1 = new double[rows/2];
-        double[] eucildeanDisClass3 = new double[rows/2];
-
-        //Creating a 3D array with Double[] and string
-        Double[][] twoD1 = new Double[rows/2][5]; //TODO find how to figure out length of array from readin file (String.token)
-        Double[][] twoD2 = new Double[rows/2][5];
 
         //Reading each line of file using Scanner class
         int lineNumber = 1;
-        int lineNumber1 = 1;
-        int lineNumber2 = 1;
 
         while(scan.hasNextLine()){
             String line = scan.nextLine();
             System.out.println("line " + lineNumber + " :" + line);
+            String[] splitLine = line.split(",");
 
-            if(line.contains("class1")) {
-                for (int i = 0; i < 5; i++) {
-                    String[] splitLine = line.split(",");
-                    twoD1[lineNumber2][i] = Double.parseDouble(splitLine[i]);
-                }
-                lineNumber1++;
+            String csvClass = "";
+
+            //Array of doubles store elements of the String array
+            double[] eucildeanDis = new double[splitLine.length-1];
+            for(int i = 0; i < splitLine.length-1; i++){
+                eucildeanDis[i] = Double.parseDouble(splitLine[i]);
+            }
+            if(splitLine[splitLine.length-1].contains("1")){
+                csvClass = "1";
+            }
+            else{
+                csvClass = "2";
             }
 
-            if(line.contains("class2")){
-                for(int i = 0; i < 5; i++){
-                    String[] splitLine = line.split(",");
-                    twoD2[lineNumber1 ][i] = Double.parseDouble(splitLine[i]);
-                }
-                lineNumber2++;
-            }
+            kVector.add(new kNearestHelper(csvClass, Euclidean_Distance(a, eucildeanDis)));
             lineNumber++;
         }
 
 
-        //For loop to find all euclidean distances
+        //Sorting Algorithm of kVector
+        //TODO: Figure out sorting
+        Collections.sort(kVector);
 
-        a[1] = twoD1[1];
+        //Printing off kNearestHelper
+        for(kNearestHelper i : kVector){
+            System.out.println("Dist: " + i.eDist + " Class: " + i.csvClass);
+        }
 
-        for(int i = 0; i < rows/2; i++){
-            eucildeanDisClass1[i] = Euclidean_Distance(twoD1[i], a);
+        int numClass1 = 0;
+        int numClass2 = 0;
+
+        for(int i =0; i < k; i++){
+            if(kVector.get(i).csvClass.equals("1")){
+                numClass1++;
+            }
+            else{
+                numClass2++;
+            }
+        }
+
+        //kVector.sort(kNearestHelper::compareTo);
+
+        if(numClass1 > numClass2){
+            return numClass1;
+        }
+        else if(numClass1 < numClass2){
+            return numClass2;
+        }
+        else{
+            return 0;
+        }
+    }
+
+    /**Helper Class with K Nearest **/
+
+
+    private static class kNearestHelper implements Comparable{
+        private String csvClass = "";
+        private double eDist = 0;
+
+
+        //Constructor of kNearestHelper
+        public kNearestHelper(String csvClass, double eDist) {
+            this.csvClass = csvClass;
+            this.eDist = eDist;
+        }
+        //Getter of csvClass
+        public String getcsvClass(){
+            return csvClass;
+        }
+
+        //Getter of eDist
+        public double geteDist(){
+            return eDist;
+        }
+
+        //Setter if csvClass
+        public void setcsvClass(String csvClass) {
+            this.csvClass = csvClass;
+        }
+
+        //Setter of eDist
+        public void seteDist(double eDist) {
+            this.eDist = eDist;
+        }
+
+        //Override of the compareTo function
+        @Override
+        public int compareTo(Object o){
+            kNearestHelper compareK = (kNearestHelper) o;
+            return Double.compare(this.eDist, compareK.eDist);
         }
 
 
-        return 0;
+        @Override
+        public String toString() {
+            return "kNearestHelper{" +
+                    "csvClass='" + csvClass + '\'' +
+                    ", eDist=" + eDist +
+                    '}';
+        }
     }
-
-
-    class doubleObject{
-        int size = 0;
-
-    }
-
 }
