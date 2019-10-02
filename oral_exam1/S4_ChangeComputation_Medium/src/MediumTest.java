@@ -11,10 +11,10 @@ public class MediumTest {
             String exitTransaction = "y";
             Random rdmInt = new Random();
 
-            ChangeComputation drawer = new ChangeComputation(0,0, rdmInt.nextInt(15),
-                    rdmInt.nextInt(15), rdmInt.nextInt(15), rdmInt.nextInt(15),
-                    rdmInt.nextInt(15), rdmInt.nextInt(15), rdmInt.nextInt(15),
-                    rdmInt.nextInt(15) );
+            ChangeComputation drawer = new ChangeComputation(0,0, rdmInt.nextInt(16),
+                    rdmInt.nextInt(16), rdmInt.nextInt(16), rdmInt.nextInt(16),
+                    rdmInt.nextInt(16), rdmInt.nextInt(16), rdmInt.nextInt(16),
+                    rdmInt.nextInt(16) );
 
             System.out.println("Welcome to S4_ChangeComputation Made by Addison Armstrong");
 

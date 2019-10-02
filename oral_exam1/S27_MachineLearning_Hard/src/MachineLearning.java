@@ -1,10 +1,9 @@
 /** this is how to get items on the javadoc **/
 
-
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collections;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -55,26 +54,26 @@ public class MachineLearning {
         return Math.sqrt(distance);
     }
 
-    public double kNearestNeighbor(String file, double[] a, int k) throws FileNotFoundException  {
+    public int kNearest(String file, double[] a, int k) throws FileNotFoundException  {
         //Vector variable to store kNearestHelper objects
         Vector<kNearestHelper> kVector = new Vector<>();
 
-        //creating File instance to reference text file in Java
+        //creating File instance to reference text file
         File text = new File(file);
 
-        //Creating Scanner instance to read File in Java
+        //Creating Scanner instance to read File
         Scanner scan = new Scanner(text);
-
 
         //Reading each line of file using Scanner class
         int lineNumber = 1;
 
         while(scan.hasNextLine()){
+
+            //Scans in next line, prints it out, then splits it
             String line = scan.nextLine();
             System.out.println("line " + lineNumber + " :" + line);
             String[] splitLine = line.split(",");
-
-            String csvClass = "";
+            String clusterClass = "";
 
             //Array of doubles store elements of the String array
             double[] eucildeanDis = new double[splitLine.length-1];
@@ -82,31 +81,31 @@ public class MachineLearning {
                 eucildeanDis[i] = Double.parseDouble(splitLine[i]);
             }
             if(splitLine[splitLine.length-1].contains("1")){
-                csvClass = "1";
+                clusterClass = "1";
             }
             else{
-                csvClass = "2";
+                clusterClass = "2";
             }
 
-            kVector.add(new kNearestHelper(csvClass, Euclidean_Distance(a, eucildeanDis)));
+            //Adds new object of kNearestHelper to the kVector
+            kVector.add(new kNearestHelper(clusterClass, Euclidean_Distance(a, eucildeanDis)));
             lineNumber++;
         }
 
 
         //Sorting Algorithm of kVector
-        //TODO: Figure out sorting
-        Collections.sort(kVector);
+        kVector.sort(kNearestHelper::compareTo);
 
         //Printing off kNearestHelper
         for(kNearestHelper i : kVector){
-            System.out.println("Dist: " + i.eDist + " Class: " + i.csvClass);
+            System.out.println("Euclidean Distance: " + i.eDist + " CSV Class: " + i.clusterClass);
         }
 
+        //Finding all classes of the nearest terms
         int numClass1 = 0;
         int numClass2 = 0;
-
         for(int i =0; i < k; i++){
-            if(kVector.get(i).csvClass.equals("1")){
+            if(kVector.get(i).clusterClass.equals("1")){
                 numClass1++;
             }
             else{
@@ -114,35 +113,26 @@ public class MachineLearning {
             }
         }
 
-        //kVector.sort(kNearestHelper::compareTo);
-
-        if(numClass1 > numClass2){
-            return numClass1;
-        }
-        else if(numClass1 < numClass2){
-            return numClass2;
-        }
-        else{
-            return 0;
-        }
+        //Return statement depending on if which numClass is greater
+        if(numClass1 > numClass2){ return 1; }
+        else if(numClass1 < numClass2){ return 2; }
+        else{ return 0; }
     }
 
     /**Helper Class with K Nearest **/
-
-
     private static class kNearestHelper implements Comparable{
-        private String csvClass = "";
+        private String clusterClass = "";
         private double eDist = 0;
 
-
         //Constructor of kNearestHelper
-        public kNearestHelper(String csvClass, double eDist) {
-            this.csvClass = csvClass;
+        public kNearestHelper(String clusterClass, double eDist) {
+            this.clusterClass = clusterClass;
             this.eDist = eDist;
         }
-        //Getter of csvClass
-        public String getcsvClass(){
-            return csvClass;
+
+        //Getter of clusterClass
+        public String getclusterClass(){
+            return clusterClass;
         }
 
         //Getter of eDist
@@ -150,9 +140,9 @@ public class MachineLearning {
             return eDist;
         }
 
-        //Setter if csvClass
-        public void setcsvClass(String csvClass) {
-            this.csvClass = csvClass;
+        //Setter if clusterClass
+        public void setclusterClass(String clusterClass) {
+            this.clusterClass = clusterClass;
         }
 
         //Setter of eDist
@@ -166,14 +156,106 @@ public class MachineLearning {
             kNearestHelper compareK = (kNearestHelper) o;
             return Double.compare(this.eDist, compareK.eDist);
         }
+    }
+
+    public String kMeans(String file, int k)throws FileNotFoundException{
+        //Random Class initialized
+        Random rdm = new Random();
+
+        //Vector variable to store kMeansHelper objects
+        Vector<kMeansHelper> kVector = new Vector<>();
+
+        //creating File instance to reference text file
+        File text = new File(file);
+
+        //Creating Scanner instance to read File
+        Scanner scan = new Scanner(text);
+
+        //Reading each line of file using Scanner class
+        int lineNumber = 1;
+
+        //Initializing a xMax, xMin, yMax, and yMin to use for random ranges
+        double xMax = 0;
+        double xMin = 0;
+        double yMax = 0;
+        double yMin = 0;
+
+        while(scan.hasNextLine()){
+
+            //Scans in next line, prints it out, then splits it
+            String line = scan.nextLine();
+            System.out.println("line " + lineNumber + " :" + line);
+            String[] splitLine = line.split(",");
+            int clusterClass = 0;
+
+            //Array of doubles store elements of the String array
+            double[] cords = new double[splitLine.length-1];
+            for(int i = 0; i < splitLine.length-1; i++){
+                cords[i] = Double.parseDouble(splitLine[i]);
+            }
+
+            //Finding mins and maxs and updating them
+            if(cords[0] > xMax){
+                xMax = cords[0];
+            }else if(cords[0] < xMin){
+                xMin = cords[0];
+            }else if(cords[1] > yMax){
+                yMax = cords[1];
+            }else if(cords[1] < yMin){
+                yMin = cords[1];
+            }
+
+            //Adds new object of kNearestHelper to the kVector
+            kVector.add(new kMeansHelper(clusterClass, cords));
+
+            lineNumber++;
+        }
+
+        //Creates new k number of centroids
+        Vector<kMeansHelper> centroids = new Vector<>();
+        for(int i = 0; i < k; i++){
+            centroids.add(new kMeansHelper(i+1, new double[]{rdm.nextDouble() * (xMax - xMin) + xMin,
+                    rdm.nextDouble() * (yMax - yMin) + yMin  }));
+        }
 
 
-        @Override
-        public String toString() {
-            return "kNearestHelper{" +
-                    "csvClass='" + csvClass + '\'' +
-                    ", eDist=" + eDist +
-                    '}';
+        //TODO: Figure out a way to compare old results and new results
+        //TODO: How to make k number of vectors and use euclidean to compare results and figure out which class it goes to
+        while(0==0){
+            for(kMeansHelper i : kVector){
+                double eDist1 = 0;
+            }
+            break;
+        }
+
+
+        return "";
+    }
+
+    private static class kMeansHelper{
+        private int clusterClass = 0;
+        private double[] cordinates = {0,0};
+
+        public kMeansHelper(int clusterClass, double[] cordinates) {
+            this.clusterClass = clusterClass;
+            this.cordinates = cordinates;
+        }
+
+        public int getclusterClass() {
+            return clusterClass;
+        }
+
+        public void setclusterClass(int clusterClass) {
+            this.clusterClass = clusterClass;
+        }
+
+        public double[] getCordinates() {
+            return cordinates;
+        }
+
+        public void setCordinates(double[] cordinates) {
+            this.cordinates = cordinates;
         }
     }
+
 }

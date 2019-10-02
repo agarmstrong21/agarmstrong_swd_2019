@@ -157,13 +157,16 @@ class MachineLearningEasyTest extends MachineLearning {
             assertEquals(8.0, Hamming_Distance(a, b));
         }
 
-        // Kth-Nearest Tests
-
+        // Kth-Nearest Test
+        //TODO: Do i need a test for medium? or just a main?
         @Test void ktest() throws FileNotFoundException {
-            String file = "C:\\Users\\addis\\OneDrive\\Documents\\Intro to Software Design\\agarmstrong_swd\\oral_exam1\\S27_MachineLearning_Hard\\src\\S27-MLMedium.csv";
-            double[]a = {0};
-            int k = 0;
-            double y = 0;
-            y = kNearestNeighbor(file, a, k);
+            //String file = "C:\\Users\\addis\\OneDrive\\Documents\\Intro to Software Design\\agarmstrong_swd\\oral_exam1\\S27_MachineLearning_Hard\\src\\S27-MLMedium.csv";
+            String file = "C:\\Users\\agarmstrong\\IdeaProjects\\agarmstrong_swd\\oral_exam1\\S27_MachineLearning_Hard\\S27-MLMedium.csv";
+            double[]a = {0, 1, 2, 3, 4};
+            int k = 5;
+            assertEquals("New data point belongs to class1","New data point belongs to class" + kNearest(file, a, k));
         }
+
+        //K-Means Clustering Test
+        //TODO: Make test representing the test used in the prompt
 }
