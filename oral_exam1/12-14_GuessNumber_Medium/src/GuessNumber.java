@@ -44,32 +44,44 @@ public class GuessNumber extends JFrame {
 
     //Logic for NumberGuesser
     public static void main(String[] args) {
-            GuessNumber textFieldFrame = new GuessNumber();
-            textFieldFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            textFieldFrame.setSize(350, 100);
-            textFieldFrame.setVisible(true);
-
+        GuessNumber textFieldFrame = new GuessNumber();
+        textFieldFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        textFieldFrame.setSize(350, 100);
+        textFieldFrame.setVisible(true);
 
 
         Scanner readIn = new Scanner(System.in);
+        String inputString = "";
         int input = 0;
         Random rmdInt = new Random();
         int given = rmdInt.nextInt(998) + 1;
+        int pInput = given;
 
         //While loop to give the user infinite number of guesses to find the right value.
         System.out.println("Welcome to Number Guesser, please input a value between 1 and 1000.");
         while(given != input){
-            input = readIn.nextInt();
-            if(input == given){
-                System.out.println("Good Job! You got it!");
-            } else if (input > 1000 || input < 1) {
-                System.out.println("You entered a value too not in the range, please try again.");
-            } else if (input > given) {
-                System.out.println("You are too high, try again.");
-            } else if (input < given) {
-                System.out.println("You are too low, try again.");
+            pInput = input;
+            inputString = readIn.nextLine();
+            try {
+                input = Integer.parseInt(inputString);
+                if (input > 0 && input < 1001) {
+                    if (input == given) {
+                        System.out.println("Good Job! You got it! (GREEN)");
+                    } else if (input > given && input < pInput) {
+                        System.out.println("Getting Warmer.... Too High (RED)");
+                    } else if (input > given && input > pInput) {
+                        System.out.println("Getting Colder.... Too High (BLUE)");
+                    } else if (input < given && input > pInput) {
+                        System.out.println("Getting Warmer.... Too Low (RED)");
+                    } else if (input < given && input < pInput) {
+                        System.out.println("Getting Colder.... Too Low (BLUE)");
+                    }
+                }
+            }catch(NumberFormatException e) {
+                System.out.println("You entered a value that is not an integer. Please try again.");
+                throw e;
             }
+
         }
     }
-
 }

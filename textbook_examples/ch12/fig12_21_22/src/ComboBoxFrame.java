@@ -8,7 +8,7 @@ import java.awt.event.ItemListener;
 
 public class ComboBoxFrame extends JFrame {
     private static final String[] names =
-            {"bug1.gif", "bug2.gif", "travelbug.gif", "buganim.gif"};
+            {"bug1.GIF", "bug2.GIF" , "travelbug.gif", "buganim.gif"};
     private final JComboBox<String> imagesJComboBox; // hold icon names
     private final JLabel label; // displays selected icon
     private final Icon[] icons = {

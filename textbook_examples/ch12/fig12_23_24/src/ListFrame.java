@@ -22,7 +22,7 @@ public class ListFrame extends JFrame {
         setLayout(new FlowLayout());
 
         colorJList = new JList<String>(colorNames); // list of colorNames
-        colorJList.setVisibleRowCount(5); // display five rows at once
+        colorJList.setVisibleRowCount(10); // display five rows at once
 
         // do not allow multiple selections
         colorJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
