@@ -1,7 +1,18 @@
-//Taken mostly from TextFieldFrame
-//TODO: Put in comments, comment blocks, and etc.
-//TODO: Move Main to a test file.
+/************************
+ Name: Addison Armstrong
+ Name of Project: 12-14_GuessNumber_Medium
+ Name of Class: GuessNumber
+ Description: This class contains the code to create a window which makes a number guessing game. The number guessing
+ game takes in integer values between 1 and 1000. The code randomizes an answer and the user must guess a number. If
+ number is wrong, a new window will appear telling the user that they are cold or hot based on their previous answer.
+ The window will also turn red or blue according to if the user is colder or hotter to the number. Once the number is
+ guessed, the window will turn green. Reset button is always available for the user to try a different number.
+ Date: 10/07/2019
+***********************/
 
+/************************
+ * to-dos:
+************************/
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,50 +21,75 @@ import java.util.Random;
 
 public class GuessNumber extends JFrame {
 
-    private final JTextField textField1; // text field with set size
+    private final JTextField textStatement;
+    private final JTextField textStatement2;
+    private final JTextField textField;
     private final JButton resetJButton;
     private int given = new Random().nextInt(998) + 1;
     private int pInput = given;
 
     public GuessNumber() {
-        super("12-14_GuessNumber_Medium");
-        setLayout(new FlowLayout());
+        super("Guess Number Game");
+        setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-        // construct textfield with 10 columns
-        textField1 = new JTextField(10);
-        add(textField1); // add textField1 to JFrame
+        /* Constructs and Adds textStatement with game text and 21 columns */
+        textStatement = new JTextField("I have a number between 1 and 1000. Can you guess my number?", 21);
+        textStatement.setEditable(false);
+        add(textStatement);
 
-        // Adds button
-        resetJButton = new JButton("Reset"); // button with text
-        add(resetJButton); // add plainJButton to JFrame
+        textStatement2 = new JTextField("Please enter your first Guess", 18);
+        textStatement2.setEditable(false);
+        add(textStatement2);
 
-        // register event handlers
+        /* Constructs and Adds textfield with 10 columns */
+        textField = new JTextField(10);
+        add(textField);
+
+        /* Constructs and adds the Reset Button */
+        resetJButton = new JButton("Reset");
+        add(resetJButton);
+
+        /* Creates and registers event handler textHandler */
         TextFieldHandler textHandler = new TextFieldHandler();
-        textField1.addActionListener(textHandler);
+        textField.addActionListener(textHandler);
 
-
+        /* Creates and registers event handler buttonHandler */
         ButtonHandler buttonHandler = new ButtonHandler();
         resetJButton.addActionListener(buttonHandler);
     }
 
-    // private inner class for event handling
+    /* Private class for textField event handling */
     private class TextFieldHandler implements ActionListener {
-        // process textfield events
+        /* Process textfield events */
+
+        /* Overrid actionPrefromed function */
         @Override
         public void actionPerformed(ActionEvent event) {
+            /* Creating instance variable inputString, outputString, and input */
             String inputString = "";
             String outputString = "";
             int input = 0;
 
-            // user pressed Enter in JTextField textField1
-            if (event.getSource() == textField1) {
+            /* Whenever the user pressed Enter in JTextField textField */
+            if (event.getSource() == textField) {
+
+                /*Converting the entered string to an actual string */
                 inputString = String.format("%s", event.getActionCommand());
+
+                /* Try catch to see if the inputString is allowed to be an integer */
                 try{
+                    /* If inputString is allowed to be an integer, set it equal to input */
                     input = Integer.parseInt(inputString);
+
+                    /* If statement to make sure that input is between 1 and 1000 */
                     if (input > 0 && input < 1001) {
+
+                        /* If statements that evaluated the input. Depending on where the input lands, the main window */
+                        /* will change colors, and a new window will pop up stating where the input lands */
                         if (input == given) {
                             outputString = "Good Job! You got it! (GREEN)";
                             getContentPane().setBackground(Color.green);
+                            textField.setEditable(false);
                         } else if (input > given && input < pInput) {
                             outputString = "Getting Warmer.... Too High (RED)";
                             getContentPane().setBackground(Color.red);
@@ -69,40 +105,31 @@ public class GuessNumber extends JFrame {
                         }
                     }
                     else{
-                        outputString = "Sorry you entered a invalid number. Please try again";
+                        outputString = "Sorry you entered a invalid number between 1 and 1000. Please try again";
                         getContentPane().setBackground(Color.WHITE);
                     }
-
                 }catch(NumberFormatException e){
                     outputString = "You entered a value that is not an integer. Please try again.";
                 }
             }
-
-            // display JTextField content
-            JOptionPane.showMessageDialog(null, outputString + " " + given);
+            /* Display JTextField content */
+            JOptionPane.showMessageDialog(null, outputString);
             pInput = input;
         }
-    } // end private inner class TextFieldHandler
+    }
 
-    // inner class for button event handling
+    /* Private class for reset button event handling */
     private class ButtonHandler implements ActionListener {
-        // handle button event
+        /* handle button event */
         @Override
         public void actionPerformed(ActionEvent event) {
-            JOptionPane.showMessageDialog(GuessNumber.this, String.format(
-                    "Restarted the Game", event.getActionCommand()));
+            /* When Reset button is pressed, re initializes the random int and changes the background color to white*/
+            JOptionPane.showMessageDialog(GuessNumber.this, "Restarted the Game");
             given = new Random().nextInt(998) + 1;
             pInput = given;
             getContentPane().setBackground(Color.WHITE);
+            textField.setEditable(true);
         }
     }
-
-    //Logic for NumberGuesser
-    public static void main(String[] args) {
-        GuessNumber textFieldFrame = new GuessNumber();
-        textFieldFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        textFieldFrame.setSize(350, 100);
-        textFieldFrame.setVisible(true);
-    }
 }
-//test
+/*End program */

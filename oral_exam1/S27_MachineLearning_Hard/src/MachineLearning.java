@@ -114,9 +114,10 @@ public class MachineLearning {
         }
 
         //Return statement depending on if which numClass is greater
+        //TODO: If tie, return either one, if k is greater than file, then return just class 1
         if(numClass1 > numClass2){ return 1; }
         else if(numClass1 < numClass2){ return 2; }
-        else{ return 0; }
+        else { return 1; }
     }
 
     /**Helper Class with K Nearest **/
@@ -218,12 +219,12 @@ public class MachineLearning {
                     rdm.nextDouble() * (yMax - yMin) + yMin  }));
         }
 
-
         //TODO: Figure out a way to compare old results and new results
         //TODO: How to make k number of vectors and use euclidean to compare results and figure out which class it goes to
         while(0==0){
             for(kMeansHelper i : kVector){
                 double eDist1 = 0;
+
             }
             break;
 
@@ -236,6 +237,7 @@ public class MachineLearning {
     private static class kMeansHelper{
         private int clusterClass = 0;
         private double[] cordinates = {0,0};
+        private int numCluster = 0;
 
         public kMeansHelper(int clusterClass, double[] cordinates) {
             this.clusterClass = clusterClass;
@@ -256,6 +258,14 @@ public class MachineLearning {
 
         public void setCordinates(double[] cordinates) {
             this.cordinates = cordinates;
+        }
+
+        public int getNumCluster() {
+            return numCluster;
+        }
+
+        public void setNumCluster(int numCluster) {
+            this.numCluster = numCluster;
         }
     }
 
