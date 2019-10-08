@@ -2,7 +2,6 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Vector;
@@ -16,7 +15,6 @@ public class MachineLearning {
         double sumA = 0.0;
         double sumB = 0.0;
         double sumTop = 0.0;
-        double sumBottom = 0.0;
         for(int i = 0; i < a.length; i++){
             sumA += (a[i] * a[i]);
             sumB += (b[i] * b[i]);
