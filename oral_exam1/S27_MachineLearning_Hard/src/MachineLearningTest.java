@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MachineLearningEasyTest extends MachineLearning {
+class MachineLearningTest extends MachineLearning {
 
     // Cosine Similarity Tests
         @Test
@@ -174,4 +174,13 @@ class MachineLearningEasyTest extends MachineLearning {
         }
         //K-Means Clustering Test
         //TODO: Make test representing the test used in the prompt
+
+        @Test void kMeansTest() throws FileNotFoundException{
+            String file = "S27-MLHard.csv";
+            int k = 4;
+            assertEquals("cluster1: 20 data points\n" +
+                    "cluster2: 30 data points\n" +
+                    "cluster3: 20 data points\n" +
+                    "cluster4: 50 data points", kMeans(file, k));
+        }
 }

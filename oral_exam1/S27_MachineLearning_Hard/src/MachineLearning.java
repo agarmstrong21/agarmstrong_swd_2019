@@ -1,10 +1,11 @@
 /** this is how to get items on the javadoc **/
 
+import org.w3c.dom.Node;
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Random;
-import java.util.Scanner;
-import java.util.Vector;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class MachineLearning {
 
@@ -72,7 +73,7 @@ public class MachineLearning {
             String line = scan.nextLine();
             System.out.println("line " + lineNumber + " :" + line);
             String[] splitLine = line.split(",");
-            String clusterClass = "";
+            int clusterClass = 0;
 
             //Array of doubles store elements of the String array
             double[] eucildeanDis = new double[splitLine.length-1];
@@ -80,10 +81,10 @@ public class MachineLearning {
                 eucildeanDis[i] = Double.parseDouble(splitLine[i]);
             }
             if(splitLine[splitLine.length-1].contains("1")){
-                clusterClass = "1";
+                clusterClass = 1;
             }
             else{
-                clusterClass = "2";
+                clusterClass = 2;
             }
 
             //Adds new object of kNearestHelper to the kVector
@@ -104,7 +105,7 @@ public class MachineLearning {
         int numClass1 = 0;
         int numClass2 = 0;
         for(int i =0; i < k; i++){
-            if(kVector.get(i).clusterClass.equals("1")){
+            if(kVector.get(i).clusterClass == 1){
                 numClass1++;
             }
             else{
@@ -119,19 +120,20 @@ public class MachineLearning {
         else { return "New data point belongs to class1"; }
     }
 
+
     /**Helper Class with K Nearest **/
     private static class kNearestHelper implements Comparable{
-        private String clusterClass = "";
+        private int clusterClass = 0;
         private double eDist = 0;
 
         //Constructor of kNearestHelper
-        public kNearestHelper(String clusterClass, double eDist) {
+        public kNearestHelper(int clusterClass, double eDist) {
             this.clusterClass = clusterClass;
             this.eDist = eDist;
         }
 
         //Getter of clusterClass
-        public String getclusterClass(){
+        public int getclusterClass(){
             return clusterClass;
         }
 
@@ -141,7 +143,7 @@ public class MachineLearning {
         }
 
         //Setter if clusterClass
-        public void setclusterClass(String clusterClass) {
+        public void setclusterClass(int clusterClass) {
             this.clusterClass = clusterClass;
         }
 
@@ -159,6 +161,8 @@ public class MachineLearning {
     }
 
     public String kMeans(String file, int k)throws FileNotFoundException{
+        String returnString = "";
+
         //Random Class initialized
         Random rdm = new Random();
 
@@ -175,33 +179,33 @@ public class MachineLearning {
         int lineNumber = 1;
 
         //Initializing a xMax, xMin, yMax, and yMin to use for random ranges
-        double xMax = 0;
-        double xMin = 0;
-        double yMax = 0;
-        double yMin = 0;
+        double xMax = -9999;
+        double xMin = 9999;
+        double yMax = -9999;
+        double yMin = 9999;
 
         while(scan.hasNextLine()){
 
             //Scans in next line, prints it out, then splits it
             String line = scan.nextLine();
-            System.out.println("line " + lineNumber + " :" + line);
+//            System.out.println("line " + lineNumber + " :" + line);
             String[] splitLine = line.split(",");
             int clusterClass = 0;
 
             //Array of doubles store elements of the String array
-            double[] cords = new double[splitLine.length-1];
-            for(int i = 0; i < splitLine.length-1; i++){
+            double[] cords = new double[2];
+            for(int i = 0; i < 2; i++){
                 cords[i] = Double.parseDouble(splitLine[i]);
             }
 
             //Finding mins and maxs and updating them
             if(cords[0] > xMax){
                 xMax = cords[0];
-            }else if(cords[0] < xMin){
+            }if(cords[0] < xMin){
                 xMin = cords[0];
-            }else if(cords[1] > yMax){
+            }if(cords[1] > yMax){
                 yMax = cords[1];
-            }else if(cords[1] < yMin){
+            }if(cords[1] < yMin){
                 yMin = cords[1];
             }
 
@@ -220,23 +224,55 @@ public class MachineLearning {
 
         //TODO: Figure out a way to compare old results and new results
         //TODO: How to make k number of vectors and use euclidean to compare results and figure out which class it goes to
-        while(0==0){
-            for(kMeansHelper i : kVector){
-                double eDist1 = 0;
 
+        Vector<kMeansHelper> prevTemp = centroids;
+        boolean isSame = false;
+
+        int doesWhileWork = 0;
+        while(!isSame){
+            isSame = false;
+            prevTemp = centroids;
+            for(int i = 0; i < kVector.size(); i ++){
+                Vector<kNearestHelper> Dists = new Vector<>(k);
+                for(int j = 0; j < k; j++){
+                    Dists.add(new kNearestHelper(j , Euclidean_Distance(kVector.get(i).cordinates, centroids.get(j).cordinates)));
+                }
+                Dists.sort(kNearestHelper::compareTo);
+                kVector.get(i).setclusterClass(Dists.get(0).clusterClass);
+                double[] average = kVector.get(i).cordinates;
+                average[0] += kVector.get(i).getAverageX();
+                average[1] += kVector.get(i).getAverageY();
+                centroids.get(kVector.get(i).clusterClass).setAverage(average);
+                centroids.get(kVector.get(i).clusterClass).setNumCluster(centroids.get(kVector.get(i).clusterClass).getNumCluster()+1);
             }
-            break;
 
+            for(int i = 0; i < k; i++){
+                double[] newAverage = {0,0};
+                newAverage[0] = centroids.get(i).getAverageX()/centroids.get(i).getNumCluster();
+                newAverage[1] = centroids.get(i).getAverageY()/centroids.get(i).getNumCluster();
+                centroids.get(i).setCordinates(newAverage);
+
+                if(centroids.get(i).getNumCluster() != prevTemp.get(i).getNumCluster()){
+                    isSame = false;
+                }
+            }
+
+            doesWhileWork++;
         }
+        System.out.println(doesWhileWork);
 
 
-        return "";
+        for(int i = 0; i < k; i++){
+            returnString += "cluster" + (i+1) + ": " + centroids.get(i).getNumCluster() + " data points\n";
+        }
+        return returnString;
     }
 
     private static class kMeansHelper{
         private int clusterClass = 0;
         private double[] cordinates = {0,0};
         private int numCluster = 0;
+        private double[] average = {0,0};
 
         public kMeansHelper(int clusterClass, double[] cordinates) {
             this.clusterClass = clusterClass;
@@ -259,12 +295,36 @@ public class MachineLearning {
             this.cordinates = cordinates;
         }
 
+        public double getCordinatesX() {
+            return cordinates[0];
+        }
+
+        public double getCordinatesY() {
+            return cordinates[1];
+        }
+
         public int getNumCluster() {
             return numCluster;
         }
 
         public void setNumCluster(int numCluster) {
             this.numCluster = numCluster;
+        }
+
+        public double[] getAverage() {
+            return average;
+        }
+
+        public void setAverage(double[] average) {
+            this.average = average;
+        }
+
+        public double getAverageX() {
+            return average[0];
+        }
+
+        public double getAverageY() {
+            return average[1];
         }
     }
 
