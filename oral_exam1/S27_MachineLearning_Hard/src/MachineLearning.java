@@ -53,7 +53,7 @@ public class MachineLearning {
         return Math.sqrt(distance);
     }
 
-    public int kNearest(String file, double[] a, int k) throws FileNotFoundException  {
+    public String kNearest(String file, double[] a, int k) throws FileNotFoundException  {
         //Vector variable to store kNearestHelper objects
         Vector<kNearestHelper> kVector = new Vector<>();
 
@@ -114,9 +114,9 @@ public class MachineLearning {
 
         //Return statement depending on if which numClass is greater
         //TODO: If tie, return either one, if k is greater than file, then return just class 1
-        if(numClass1 > numClass2){ return 1; }
-        else if(numClass1 < numClass2){ return 2; }
-        else { return 1; }
+        if(numClass1 > numClass2){ return "New data point belongs to class1"; }
+        else if(numClass1 < numClass2){ return "New data point belongs to class2"; }
+        else { return "New data point belongs to class1"; }
     }
 
     /**Helper Class with K Nearest **/

@@ -159,13 +159,19 @@ class MachineLearningEasyTest extends MachineLearning {
 
         // Kth-Nearest Test
         //TODO: Do i need a test for medium? or just a main?
-        @Test void ktest() throws FileNotFoundException {
+        @Test void kNearestTest() throws FileNotFoundException {
             String file = "S27-MLMedium.csv";
-            double[]a = {0, 1, 2, 3, 4};
+            double[]a = {1.5, 3.5, 2, 2, 8};
             int k = 5;
-            assertEquals("New data point belongs to class1","New data point belongs to class" + kNearest(file, a, k));
+            assertEquals("New data point belongs to class1",kNearest(file, a, k));
         }
 
+        @Test void kNearestTest2() throws FileNotFoundException {
+            String file = "S27-MLMedium.csv";
+            double[] a = {3, 3, 2, 2, 1};
+            int k = 5;
+            assertEquals("New data point belongs to class2", kNearest(file, a, k));
+        }
         //K-Means Clustering Test
         //TODO: Make test representing the test used in the prompt
 }
