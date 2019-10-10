@@ -6,7 +6,7 @@ public class ArabicToRomanTest extends ArabicToRoman {
         /* Creating the Window for ArabicToRoman */
         ArabicToRoman textFieldFrame = new ArabicToRoman();
         textFieldFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        textFieldFrame.setSize(400,200);
+        textFieldFrame.setSize(200,200);
         textFieldFrame.setVisible(true);
     }
 }
