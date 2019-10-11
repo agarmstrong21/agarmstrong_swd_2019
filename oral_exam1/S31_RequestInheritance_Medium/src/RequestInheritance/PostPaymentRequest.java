@@ -1,10 +1,15 @@
 package RequestInheritance;
 
-public class PostPaymentRequest {
-    private static int count = 0;
+import java.util.UUID;
 
-    public PostPaymentRequest(int count) {
-        this.count = count;
+public class PostPaymentRequest extends PostRequest{
+    private static int count = 0;
+    private static Payment payment;
+
+    public PostPaymentRequest(UUID uuid, String ip, Payment payment) {
+        super(uuid, ip);
+        PostPaymentRequest.payment = payment;
+        count++;
     }
 
     public static int count() {
@@ -12,6 +17,15 @@ public class PostPaymentRequest {
     }
 
     public void setCount(int count) {
-        this.count = count;
+        PostPaymentRequest.count = count;
+    }
+
+    public static Payment payment(){
+        return payment;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + payment.toString();
     }
 }

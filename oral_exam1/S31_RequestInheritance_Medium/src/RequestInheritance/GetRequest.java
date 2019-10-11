@@ -3,13 +3,12 @@ import java.util.UUID;
 
 public class GetRequest extends Request{
     private static int count = 0;
-    private static UUID uuid;
     private static String url;
 
     public GetRequest(UUID uuid, String url) {
         super(uuid);
-        GetRequest.uuid = uuid;
         GetRequest.url = url;
+        count++;
     }
 
     public static int count() {
@@ -17,6 +16,11 @@ public class GetRequest extends Request{
     }
 
     public void setCount(int count) {
-        this.count = count;
+        GetRequest.count = count;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\nUniversal Resource Locator (URL): " + url;
     }
 }

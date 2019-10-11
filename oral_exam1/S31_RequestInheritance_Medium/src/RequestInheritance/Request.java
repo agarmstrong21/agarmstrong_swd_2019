@@ -8,21 +8,17 @@ public class Request {
 
     public Request(UUID uuid) {
         Request.uuid = uuid;
+        count++;
     }
 
-    public static int  count() {
+    public static int count() {
         return count;
     }
 
-    public void setCount(int count) {
-        Request.count = count;
-    }
+    public static UUID uuid(){return uuid;}
 
-    public static UUID getUuid() {
-        return uuid;
-    }
-
-    public static void setUuid(UUID uuid) {
-        Request.uuid = uuid;
+    @Override
+    public String toString() {
+        return super.toString() + "\nUUID: " + uuid;
     }
 }
