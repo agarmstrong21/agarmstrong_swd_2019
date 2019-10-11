@@ -15,7 +15,7 @@ public class GuessNumberTest extends GuessNumber {
         /* Creating the Window of GuessNumber */
         GuessNumber textFieldFrame = new GuessNumber();
         textFieldFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        textFieldFrame.setSize(400, 200);
+        textFieldFrame.setSize(400,100);
         textFieldFrame.setVisible(true);
     }
 }

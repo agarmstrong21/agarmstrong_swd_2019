@@ -33,11 +33,11 @@ public class GuessNumber extends JFrame {
         setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
         /* Constructs and Adds textStatement with game text and 21 columns */
-        textStatement = new JTextField("I have a number between 1 and 1000. Can you guess my number?", 34);
+        textStatement = new JTextField("I have a number between 1 and 1000. Can you guess my number?");
         textStatement.setEditable(false);
         add(textStatement);
 
-        textStatement2 = new JTextField("Please enter your first Guess", 15);
+        textStatement2 = new JTextField("Please enter your first Guess");
         textStatement2.setEditable(false);
         add(textStatement2);
 
