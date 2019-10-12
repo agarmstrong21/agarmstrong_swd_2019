@@ -1,9 +1,12 @@
+/* This code was given via ICON. No changes necessary. */
+
 package RequestInheritance;
 
 import java.util.HashMap;
 import java.util.Random;
 import java.util.UUID;
 
+/** This code was given via ICON. No changes necessary. */
 class DataGenerator {
     // fields to hold example data
     private Random rand;

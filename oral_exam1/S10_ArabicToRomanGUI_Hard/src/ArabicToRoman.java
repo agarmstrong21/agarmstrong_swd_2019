@@ -1,88 +1,68 @@
+/*
+Name: Addison Armstrong
+Name of Project: S10_ArabicToRomanGUI_Hard
+Name of Class: ArabicToRomanDriver
+Class Description: ArabicToRoman class is a GUI that changes the users input between Arabic numbers or Roman Numbers.
+ */
 
-
+// Importing classes to help with
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+//Creating ArabicToRoman class
+/**ArabicToRoman class is a GUI that changes the users input between Arabic numbers or Roman Numbers.*/
+class ArabicToRoman extends JFrame {
 
-public class ArabicToRoman extends JFrame {
-
-    private final JTextField textStatementArabic;
-    private final JTextField textStatementRoman;
+    //Creating private final variables for the TextFields
     private final JTextField textFieldArabic;
     private final JTextField textFieldRoman;
 
-//    private JTextArea textAreaArabic;
-//    private JTextArea textAreaRoman;
-    private ArabicKeyListener arabicKeyListener;
-    private RomanKeyListener romanKeyListener;
-
-
-
-    public ArabicToRoman() {
+    // Constructor for ArabicToRoman
+    ArabicToRoman() {
+        //Set up of the GUI window
         super("Arabic to Roman");
         setLayout(new GridLayout(2, 2));
 
-        textStatementArabic = new JTextField("Arabic");
+        // Adding textStatement that says arabic
+        JTextField textStatementArabic = new JTextField("Arabic");
         textStatementArabic.setEditable(false);
         textStatementArabic.setLocation(1,2);
         add(textStatementArabic);
 
-
-        textStatementRoman = new JTextField("Roman");
+        // Adding textStatement that says roman
+        JTextField textStatementRoman = new JTextField("Roman");
         textStatementRoman.setEditable(false);
         textStatementRoman.setLocation(2,2);
         add(textStatementRoman);
 
-//        textAreaArabic = new JTextArea(10,15);
-//        textAreaArabic.setText("Arabic");
-//        textAreaArabic.setEnabled(true);
-//        textAreaArabic.setDisabledTextColor(Color.BLACK);
-//        add(textAreaArabic);
-//
-//
-//
-//        textAreaRoman = new JTextArea(10,15);
-//        textAreaRoman.setText("Roman");
-//        textAreaRoman.setEnabled(true);
-//        textAreaArabic.setDisabledTextColor(Color.BLACK);
-//        add(textAreaRoman);
-
+        // adding a textField and key listeners for the arabic side
         textFieldArabic = new JTextField("Arabic",10);
         textFieldArabic.setLocation(1,1);
         add(textFieldArabic);
-        arabicKeyListener = new ArabicKeyListener();
+        ArabicKeyListener arabicKeyListener = new ArabicKeyListener();
         textFieldArabic.addKeyListener(arabicKeyListener);
 
+        // adding a textField and key listeners for the roman side
         textFieldRoman = new JTextField("Roman" ,10);
         textFieldArabic.setLocation(2,1);
         add(textFieldRoman);
-        romanKeyListener = new RomanKeyListener();
+        RomanKeyListener romanKeyListener = new RomanKeyListener();
         textFieldRoman.addKeyListener(romanKeyListener);
-//
-//        TextFieldHandler ArabicHandler;
-//        ArabicHandler = new TextFieldHandler();
-//        textFieldArabic.addActionListener(ArabicHandler);
-//
-//        TextFieldHandler RomanHandler  = new TextFieldHandler();
-//        textFieldRoman.addActionListener(RomanHandler);
     }
 
+    //Creating ArabicKeyListener Class
+    /**ArabicKeyListener is a overrided class of KeyListener to use our logic for the text fields.*/
     private class ArabicKeyListener implements KeyListener
     {
+        //Overriding KeyTyped, keyPressed, and keyReleased to our logic
         @Override
         public void keyTyped (KeyEvent event){
-//        String input = String.format("%s", event.getKeyChar());
-//        translate(input);
     }
 
         @Override
         public void keyPressed (KeyEvent event){
-//        String input = String.format("%s", KeyEvent.getKeyText(event.getKeyCode()));
-//        translate(input);
     }
 
         @Override
@@ -91,55 +71,55 @@ public class ArabicToRoman extends JFrame {
         translate(input);
     }
 
+        //Private void method that translates the inputted string to arabic or roman respectively
         private void translate (String inputString){
-        String outputString = "";
-        int input = 0;
-        int output = 0;
+        StringBuilder outputString = new StringBuilder();
+        int input;
+            //A try catch to make sure the values entered are valid
             try {
-
                 input = Integer.parseInt(inputString);
-
                 int temp = input;
                 if (temp < 4000 && temp > 0) {
+                    //While loop of changing the Arabic numbers to Roman numbers
                     while (temp != 0) {
                         if (temp >= 1000) {
-                            outputString += "M";
+                            outputString.append("M");
                             temp -= 1000;
                         } else if (temp >= 900) {
-                            outputString += "CM";
+                            outputString.append("CM");
                             temp -= 900;
                         } else if (temp >= 500) {
-                            outputString += "D";
+                            outputString.append("D");
                             temp -= 500;
                         } else if (temp >= 400) {
-                            outputString += "CD";
+                            outputString.append("CD");
                             temp -= 400;
                         } else if (temp >= 100) {
-                            outputString += "C";
+                            outputString.append("C");
                             temp -= 100;
                         } else if (temp >= 90) {
-                            outputString += "XC";
+                            outputString.append("XC");
                             temp -= 90;
                         } else if (temp >= 50) {
-                            outputString += "L";
+                            outputString.append("L");
                             temp -= 50;
                         } else if (temp >= 40) {
-                            outputString += "XL";
+                            outputString.append("XL");
                             temp -= 40;
                         } else if (temp >= 10) {
-                            outputString += "X";
+                            outputString.append("X");
                             temp -= 10;
                         } else if (temp >= 9) {
-                            outputString += "IX";
+                            outputString.append("IX");
                             temp -= 9;
                         } else if (temp >= 5) {
-                            outputString += "V";
+                            outputString.append("V");
                             temp -= 5;
                         } else if (temp >= 4) {
-                            outputString += "IV";
+                            outputString.append("IV");
                             temp -= 4;
                         } else if (temp >= 1) {
-                            outputString += "I";
+                            outputString.append("I");
                             temp -= 1;
                         }
                     }
@@ -150,41 +130,42 @@ public class ArabicToRoman extends JFrame {
                 JOptionPane.showMessageDialog(null,
                         "You entered a value that is not an integer. Please try again.");
             }
-            textFieldRoman.setText(outputString);
+            //Replaces text in roman to the new text
+            textFieldRoman.setText(outputString.toString());
         }
     }
 
+    //Creating RomanKeyListener
+    /**Creating RomanKeyListener that overrides keyListener to our logic*/
     private class RomanKeyListener implements KeyListener{
+
+        //Methods keyTyped, keyPressed, and keyReleased are overrided to our logic
         @Override
         public void keyTyped (KeyEvent event){
-//            String input = String.format("%s", event.getKeyChar());
-//            translate(event, input);
         }
 
         @Override
         public void keyPressed (KeyEvent event){
-//            String input = String.format("%s", KeyEvent.getKeyText(event.getKeyCode()));
-//            translate(event, input);
         }
 
         @Override
         public void keyReleased (KeyEvent event){
-//            String input = String.format("%s", KeyEvent.getKeyText(event.getKeyCode()));
-//            translate(event, input);
             translate(textFieldRoman.getText());
         }
+
+        //translate method translates the inputted string to arabic
         private void translate(String inputString){
-            String outputString = "";
-            int input = 0;
             int output = 0;
+                //try catch to make sure the string is valid
                 try {
                     inputString = inputString.toUpperCase();
-
                     String temp = inputString;
+
                     if ((temp.contains("MMMM") || temp.contains("CCCC") || temp.contains("DDDD") || temp.contains("XXXX")
                             || temp.contains("VVVV") || temp.contains("IIII") || temp.contains("LLLL"))) {
                         throw new NumberFormatException();
                     } else {
+                        //While loop to change roman to arabic, uses letters that contain two first to make sure it reads it right
                         while (!temp.isEmpty()) {
                             if (temp.contains("CM")) {
                                 temp = temp.replaceFirst("CM", "");
@@ -232,6 +213,7 @@ public class ArabicToRoman extends JFrame {
                     JOptionPane.showMessageDialog(null,
                             "You entered a string with the wrong characters. Please try again.");
                 }
+                //Changes the arabic textfield to represent the output
                 textFieldArabic.setText(String.valueOf(output));
             }
         }

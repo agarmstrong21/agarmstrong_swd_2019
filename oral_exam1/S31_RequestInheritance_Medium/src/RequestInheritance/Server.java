@@ -1,8 +1,12 @@
+
+/* This code was given via ICON. No changes necessary */
+
 package RequestInheritance;
 
 import java.util.Random;
 import java.util.Stack;
 
+/** This code was given via ICON. No changes necessary. */
 public class Server extends DataGenerator {
     private static final Integer NUM_REQ_TYPES = 9;
 
