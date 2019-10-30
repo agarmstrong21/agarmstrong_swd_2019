@@ -6,7 +6,7 @@ Class Description: These are the test in medium regarding Change Computation
  */
 
 // Importing needed classes
-import java.util.Scanner;
+import  java.util.Scanner;
 import java.util.Random;
 
 //Creating MediumTest
