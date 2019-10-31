@@ -14,8 +14,8 @@ public class BlockingBufferTest {
         // create BlockingBuffer to store ints
         Buffer sharedLocation = new BlockingBuffer();
 
-        executorService.execute(new Producer1(sharedLocation));
-        executorService.execute(new Producer2(sharedLocation));
+        executorService.execute(new Producer(sharedLocation, 1, 5));
+        executorService.execute(new Producer(sharedLocation, 11, 15));
         executorService.execute(new Consumer(sharedLocation));
 
         executorService.shutdown();

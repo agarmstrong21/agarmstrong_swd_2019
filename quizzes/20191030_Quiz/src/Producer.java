@@ -3,20 +3,23 @@
 
 import java.security.SecureRandom;
 
-class Producer1 implements Runnable {
+class Producer implements Runnable {
     private static final SecureRandom generator = new SecureRandom();
     private final Buffer sharedLocation; // reference to shared object
+    private int minCount, maxCount = 0;
 
     // constructor
-    public Producer1(Buffer sharedLocation) {
+    public Producer(Buffer sharedLocation, int minCount, int maxCount) {
         this.sharedLocation = sharedLocation;
+        this.maxCount = maxCount;
+        this.minCount = minCount;
     }
 
-    // store values from 1 to 10 in sharedLocation
+    // store values from minCount to maxCount in sharedLocation
     public void run() {
         int sum = 0;
 
-        for (int count = 1; count <= 5; count++) {
+        for (int count = minCount; count <= maxCount; count++) {
             try // sleep 0 to 3 seconds, then place value in Buffer
             {
                 Thread.sleep(generator.nextInt(3000)); // random sleep
@@ -28,38 +31,9 @@ class Producer1 implements Runnable {
         }
 
         System.out.printf(
-                "Producer1 done producing%nTerminating Producer%n");
+                "Producer done producing%nTerminating Producer%n");
     }
-} // end class Producer1
-
-class Producer2 implements Runnable {
-    private static final SecureRandom generator = new SecureRandom();
-    private final Buffer sharedLocation; // reference to shared object
-
-    // constructor
-    public Producer2(Buffer sharedLocation) {
-        this.sharedLocation = sharedLocation;
-    }
-
-    // store values from 1 to 10 in sharedLocation
-    public void run() {
-        int sum = 0;
-
-        for (int count = 11; count <= 15; count++) {
-            try // sleep 0 to 3 seconds, then place value in Buffer
-            {
-                Thread.sleep(generator.nextInt(3000)); // random sleep
-                sharedLocation.blockingPut(count); // set value in buffer
-                sum += count; // increment sum of values
-            } catch (InterruptedException exception) {
-                Thread.currentThread().interrupt();
-            }
-        }
-
-        System.out.printf(
-                "Producer2 done producing%nTerminating Producer%n");
-    }
-} // end class Producer2
+} // end class Producer
 
 
 /**************************************************************************
