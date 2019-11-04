@@ -1,4 +1,4 @@
-/************************
+/*
  Name: Addison Armstrong
  Name of Project: 12-14_GuessNumber_Medium
  Name of Class: GuessNumber
@@ -8,36 +8,34 @@
  The window will also turn red or blue according to if the user is colder or hotter to the number. Once the number is
  guessed, the window will turn green. Reset button is always available for the user to try a different number.
  Date: 10/07/2019
-***********************/
+*/
 
-/************************
- * to-dos:
-************************/
+//Importing classes for make GUI function
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
+//Creating GuessNumberClass
+/**GuessNumber GUI is a game that you must guess the number between a set range. */
 public class GuessNumber extends JFrame {
 
-    private final JTextField textStatement;
-    private final JTextField textStatement2;
+    //Creating variables given that is a random number, TextField to type in, and a previous input
     private final JTextField textField;
-    private final JButton resetJButton;
     private int given = new Random().nextInt(998) + 1;
     private int pInput = given;
 
+    //Constructor for GuessNumber
     public GuessNumber() {
         super("Guess Number Game");
         setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-        /* Constructs and Adds textStatement with game text and 21 columns */
-        textStatement = new JTextField("I have a number between 1 and 1000. Can you guess my number?", 34);
+        /* Constructs and Adds textStatements with game text*/
+        JTextField textStatement = new JTextField("I have a number between 1 and 1000. Can you guess my number?");
         textStatement.setEditable(false);
         add(textStatement);
-
-        textStatement2 = new JTextField("Please enter your first Guess", 15);
+        JTextField textStatement2 = new JTextField("Please enter your first Guess");
         textStatement2.setEditable(false);
         add(textStatement2);
 
@@ -46,7 +44,7 @@ public class GuessNumber extends JFrame {
         add(textField);
 
         /* Constructs and adds the Reset Button */
-        resetJButton = new JButton("Reset");
+        JButton resetJButton = new JButton("Reset");
         add(resetJButton);
 
         /* Creates and registers event handler textHandler */
@@ -66,7 +64,7 @@ public class GuessNumber extends JFrame {
         @Override
         public void actionPerformed(ActionEvent event) {
             /* Creating instance variable inputString, outputString, and input */
-            String inputString = "";
+            String inputString;
             String outputString = "";
             int input = 0;
 

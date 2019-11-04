@@ -1,124 +1,171 @@
+/*
+Name: Addison Armstrong
+Name of Project: S10_ArabicToRomanGUI_Hard
+Name of Class: ArabicToRomanDriver
+Class Description: ArabicToRoman class is a GUI that changes the users input between Arabic numbers or Roman Numbers.
+ */
 
-
+// Importing classes to help with
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
+//Creating ArabicToRoman class
+/**ArabicToRoman class is a GUI that changes the users input between Arabic numbers or Roman Numbers.*/
+class ArabicToRoman extends JFrame {
 
-public class ArabicToRoman extends JFrame{
-
-    private final JTextField textStatementArabic;
-    private final JTextField textStatementRoman;
+    //Creating private final variables for the TextFields
     private final JTextField textFieldArabic;
     private final JTextField textFieldRoman;
 
-    public ArabicToRoman() {
+    // Constructor for ArabicToRoman
+    ArabicToRoman() {
+        //Set up of the GUI window
         super("Arabic to Roman");
         setLayout(new GridLayout(2, 2));
 
-        textStatementArabic = new JTextField("Arabic");
+        // Adding textStatement that says arabic
+        JTextField textStatementArabic = new JTextField("Arabic");
         textStatementArabic.setEditable(false);
         textStatementArabic.setLocation(1,2);
         add(textStatementArabic);
 
-
-        textStatementRoman = new JTextField("Roman");
+        // Adding textStatement that says roman
+        JTextField textStatementRoman = new JTextField("Roman");
         textStatementRoman.setEditable(false);
         textStatementRoman.setLocation(2,2);
         add(textStatementRoman);
 
+        // adding a textField and key listeners for the arabic side
         textFieldArabic = new JTextField("Arabic",10);
         textFieldArabic.setLocation(1,1);
         add(textFieldArabic);
+        ArabicKeyListener arabicKeyListener = new ArabicKeyListener();
+        textFieldArabic.addKeyListener(arabicKeyListener);
 
+        // adding a textField and key listeners for the roman side
         textFieldRoman = new JTextField("Roman" ,10);
         textFieldArabic.setLocation(2,1);
         add(textFieldRoman);
-
-        TextFieldHandler ArabicHandler;
-        ArabicHandler = new TextFieldHandler();
-        textFieldArabic.addActionListener(ArabicHandler);
-
-        TextFieldHandler RomanHandler  = new TextFieldHandler();
-        textFieldRoman.addActionListener(RomanHandler);
+        RomanKeyListener romanKeyListener = new RomanKeyListener();
+        textFieldRoman.addKeyListener(romanKeyListener);
     }
 
-    private class TextFieldHandler implements ActionListener {
-        /* Process TextField events */
+    //Creating ArabicKeyListener Class
+    /**ArabicKeyListener is a overrided class of KeyListener to use our logic for the text fields.*/
+    private class ArabicKeyListener implements KeyListener
+    {
+        //Overriding KeyTyped, keyPressed, and keyReleased to our logic
+        @Override
+        public void keyTyped (KeyEvent event){
+    }
 
         @Override
-        public void actionPerformed(ActionEvent event) {
-            String inputString = "";
-            String outputString = "";
-            int input = 0;
-            int output = 0;
+        public void keyPressed (KeyEvent event){
+    }
 
-            if(event.getSource() == textFieldArabic){
-                try {
-                    inputString = String.format("%s", event.getActionCommand());
-                    input = Integer.parseInt(inputString);
+        @Override
+        public void keyReleased (KeyEvent event){
+        String input = textFieldArabic.getText();
+        translate(input);
+    }
 
-                    int temp = input;
-                    if (temp < 4000 && temp > 0) {
-                        while (temp != 0) {
-                            if (temp >= 1000) {
-                                outputString += "M";
-                                temp -= 1000;
-                            } else if (temp >= 900) {
-                                outputString += "CM";
-                                temp -= 900;
-                            } else if (temp >= 500) {
-                                outputString += "D";
-                                temp -= 500;
-                            } else if (temp >= 400) {
-                                outputString += "CD";
-                                temp -= 400;
-                            } else if (temp >= 100) {
-                                outputString += "C";
-                                temp -= 100;
-                            } else if (temp >= 90) {
-                                outputString += "XC";
-                                temp -= 90;
-                            } else if (temp >= 50) {
-                                outputString += "L";
-                                temp -= 50;
-                            } else if (temp >= 40) {
-                                outputString += "XL";
-                                temp -= 40;
-                            } else if (temp >= 10) {
-                                outputString += "X";
-                                temp -= 10;
-                            } else if (temp >= 9) {
-                                outputString += "IX";
-                                temp -= 9;
-                            } else if (temp >= 5) {
-                                outputString += "V";
-                                temp -= 5;
-                            } else if (temp >= 4) {
-                                outputString += "IV";
-                                temp -= 4;
-                            } else if (temp >= 1) {
-                                outputString += "I";
-                                temp -= 1;
-                            }
+        //Private void method that translates the inputted string to arabic or roman respectively
+        private void translate (String inputString){
+        StringBuilder outputString = new StringBuilder();
+        int input;
+            //A try catch to make sure the values entered are valid
+            try {
+                input = Integer.parseInt(inputString);
+                int temp = input;
+                if (temp < 4000 && temp > 0) {
+                    //While loop of changing the Arabic numbers to Roman numbers
+                    while (temp != 0) {
+                        if (temp >= 1000) {
+                            outputString.append("M");
+                            temp -= 1000;
+                        } else if (temp >= 900) {
+                            outputString.append("CM");
+                            temp -= 900;
+                        } else if (temp >= 500) {
+                            outputString.append("D");
+                            temp -= 500;
+                        } else if (temp >= 400) {
+                            outputString.append("CD");
+                            temp -= 400;
+                        } else if (temp >= 100) {
+                            outputString.append("C");
+                            temp -= 100;
+                        } else if (temp >= 90) {
+                            outputString.append("XC");
+                            temp -= 90;
+                        } else if (temp >= 50) {
+                            outputString.append("L");
+                            temp -= 50;
+                        } else if (temp >= 40) {
+                            outputString.append("XL");
+                            temp -= 40;
+                        } else if (temp >= 10) {
+                            outputString.append("X");
+                            temp -= 10;
+                        } else if (temp >= 9) {
+                            outputString.append("IX");
+                            temp -= 9;
+                        } else if (temp >= 5) {
+                            outputString.append("V");
+                            temp -= 5;
+                        } else if (temp >= 4) {
+                            outputString.append("IV");
+                            temp -= 4;
+                        } else if (temp >= 1) {
+                            outputString.append("I");
+                            temp -= 1;
                         }
                     }
-                }catch(NumberFormatException e){
-                    outputString = "You entered a value that is not an integer. Please try again.";
-                    JOptionPane.showMessageDialog(null, outputString);
+                } else {
+                    throw new NumberFormatException();
                 }
-                textFieldRoman.setText(outputString);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null,
+                        "You entered a value that is not an integer. Please try again.");
             }
-            if(event.getSource() == textFieldRoman){
+            //Replaces text in roman to the new text
+            textFieldRoman.setText(outputString.toString());
+        }
+    }
+
+    //Creating RomanKeyListener
+    /**Creating RomanKeyListener that overrides keyListener to our logic*/
+    private class RomanKeyListener implements KeyListener{
+
+        //Methods keyTyped, keyPressed, and keyReleased are overrided to our logic
+        @Override
+        public void keyTyped (KeyEvent event){
+        }
+
+        @Override
+        public void keyPressed (KeyEvent event){
+        }
+
+        @Override
+        public void keyReleased (KeyEvent event){
+            translate(textFieldRoman.getText());
+        }
+
+        //translate method translates the inputted string to arabic
+        private void translate(String inputString){
+            int output = 0;
+                //try catch to make sure the string is valid
                 try {
-                    inputString = String.format("%s", event.getActionCommand());
-
                     inputString = inputString.toUpperCase();
-
                     String temp = inputString;
-                    if(!(temp.contains("M") && temp.contains("C") && temp.contains("D") && temp.contains("X") &&
-                            temp.contains("V") && temp.contains("I") && temp.contains("L")) ) {
+
+                    if ((temp.contains("MMMM") || temp.contains("CCCC") || temp.contains("DDDD") || temp.contains("XXXX")
+                            || temp.contains("VVVV") || temp.contains("IIII") || temp.contains("LLLL"))) {
+                        throw new NumberFormatException();
+                    } else {
+                        //While loop to change roman to arabic, uses letters that contain two first to make sure it reads it right
                         while (!temp.isEmpty()) {
                             if (temp.contains("CM")) {
                                 temp = temp.replaceFirst("CM", "");
@@ -161,15 +208,14 @@ public class ArabicToRoman extends JFrame{
                                 output += 1;
                             }
                         }
-                    }else{
-                        throw new NumberFormatException();
                     }
-                }catch(NumberFormatException e){
-                    outputString = "You entered a string with the wrong characters. Please try again.";
-                    JOptionPane.showMessageDialog(null, output);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null,
+                            "You entered a string with the wrong characters. Please try again.");
                 }
+                //Changes the arabic textfield to represent the output
                 textFieldArabic.setText(String.valueOf(output));
             }
         }
     }
-}
+

@@ -1,11 +1,15 @@
-/*Class Made by Addison Armstrong. Duplication, copying, or modification of this code is strictly prohibited.  */
-
-/*This class contains the functioning operators and methods for ChangeComputation.*/
-
+/*
+Name: Addison Armstrong
+Name of Project: S4_ChangeComputation_Medium
+Name of Class: ChangeComputation
+Class Description: This is the logic class that makes change for the user.
+ */
 
 //Importing Scanner tools
 import java.util.Scanner;
 
+//Creating ChangeCompuation
+/**This is the logic class that makes change for the user.*/
 public class ChangeComputation {
     //Initializing a private global scanner tool.
     private Scanner readIn = new Scanner(System.in);
@@ -44,7 +48,7 @@ public class ChangeComputation {
     }
 
     //stringChecker method that checks if the string provided is blank
-    public String stringChecker(String str){
+    String stringChecker(String str){
         while(str.equals("")){
             System.out.println("You gave an amount that is blank, please try again.");
             str = readIn.nextLine();
@@ -53,7 +57,7 @@ public class ChangeComputation {
     }
 
     //totalChecker method checks the total that was given in a "DD.CC" format
-    public void totalChecker(String check) {
+    void totalChecker(String check) {
         boolean temp = true;
 
         while (temp) {
@@ -80,7 +84,7 @@ public class ChangeComputation {
 
     //getMoney method asks the user to enter the amount of a certain bill or cent and adds them up. If it is not
         // enough, the method starts over again
-    public void getMoney(ChangeComputation total){
+    void getMoney(ChangeComputation total){
         String givenString;
         while(total.dollars > this.dollars || (total.dollars == this.dollars && total.cents > this.cents)){
             this.dollars  = this.cents = 0;
@@ -169,7 +173,7 @@ public class ChangeComputation {
 
     //difference method takes in a ChangeComputation given and returns given after the difference between this
         // and given is found. This also checks to make sure we have enough money in the drawer to provide change.
-    public ChangeComputation difference(ChangeComputation given){
+    ChangeComputation difference(ChangeComputation given){
         int temp;
 
         if(given.cents < this.cents){
@@ -284,7 +288,7 @@ public class ChangeComputation {
 
 
     //Print off money in a "DD.CC" format
-    public void print(){
+    void print(){
         if(this.cents < 10){
             System.out.println(this.dollars + ".0" + this.cents);
         }
@@ -306,7 +310,7 @@ public class ChangeComputation {
     }
 
     //addToDrawer method adds the given's twenties, tens, fives, etc, to the existing drawer
-    public void addToDrawer (ChangeComputation given){
+    void addToDrawer (ChangeComputation given){
         this.twenties += given.twenties;
         this.tens += given.tens;
         this.fives += given.fives;
