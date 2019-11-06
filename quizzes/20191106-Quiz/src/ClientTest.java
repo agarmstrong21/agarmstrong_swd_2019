@@ -9,7 +9,7 @@ public class ClientTest {
 
         // if no command line args
         if (args.length == 0)
-            application = new Client("127.0.0.1"); // connect to localhost
+            application = new Client("172.29.43.169"); // connect to localhost
         else
             application = new Client(args[0]); // use args to connect
 
