@@ -22,17 +22,23 @@ public class MainMenu extends JFrame{
     private class PPBHandler implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent event){
-            RandomCircle textFieldFrame = new RandomCircle();
-            textFieldFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+            TicTacToe textFieldFrame = new TicTacToe(false);
+            textFieldFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             textFieldFrame.setSize(400,100);
             textFieldFrame.setVisible(true);
+            setVisible(false);
         }
     }
 
     private class CPBHandler implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent event){
-
+            TicTacToe textFieldFrame = new TicTacToe(true);
+            textFieldFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            textFieldFrame.setSize(400,100);
+            textFieldFrame.setVisible(true);
+            setVisible(false);
         }
     }
 }

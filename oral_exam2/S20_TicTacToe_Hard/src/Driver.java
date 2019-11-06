@@ -1,5 +1,3 @@
-import sun.tools.jar.Main;
-
 import javax.swing.*;
 
 public class Driver extends MainMenu {
@@ -7,7 +5,7 @@ public class Driver extends MainMenu {
     public static void main(String[] args) {
         /* Creating the Window of GuessNumber */
         MainMenu textFieldFrame = new MainMenu();
-        textFieldFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        textFieldFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         textFieldFrame.setSize(400,100);
         textFieldFrame.setVisible(true);
     }
