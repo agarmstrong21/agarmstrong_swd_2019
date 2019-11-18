@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="369.0" prefWidth="365.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="TipCalculatorController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="369.0" prefWidth="365.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TipCalculatorController">
   <columnConstraints>
     <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="293.0" minWidth="10.0" prefWidth="105.0" />
     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="495.0" minWidth="10.0" prefWidth="260.0" />
@@ -44,7 +44,10 @@
       </Label>
       <Button fx:id="Calculate" mnemonicParsing="false" onAction="#calculateButtonPressed" prefHeight="41.0" prefWidth="220.0" text="Calculate" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <Slider fx:id="Tip" max="50.0" value="15.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <TextField fx:id="Amount" GridPane.columnIndex="1" />
+      <TextField fx:id="Amount" GridPane.columnIndex="1">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding></TextField>
       <TextField fx:id="TipText" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <TextField fx:id="Total" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
    </children>
