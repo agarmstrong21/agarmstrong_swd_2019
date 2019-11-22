@@ -22,5 +22,5 @@ public class myApp extends Application{
         }catch(IOException e){
             System.out.println(e.getMessage());
         }
-    }s
+    }
 }
