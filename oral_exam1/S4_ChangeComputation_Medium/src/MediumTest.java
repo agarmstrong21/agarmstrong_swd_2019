@@ -22,6 +22,7 @@ public class MediumTest {
             Random rdmInt = new Random();
 
             //Setting up random drawer
+
             ChangeComputation drawer = new ChangeComputation(0,0, rdmInt.nextInt(16),
                     rdmInt.nextInt(16), rdmInt.nextInt(16), rdmInt.nextInt(16),
                     rdmInt.nextInt(16), rdmInt.nextInt(16), rdmInt.nextInt(16),
