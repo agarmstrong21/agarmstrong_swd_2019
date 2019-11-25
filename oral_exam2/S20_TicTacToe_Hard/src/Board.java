@@ -13,24 +13,16 @@ public class Board extends JPanel {
 
         JButton b1 = new JButton(), b2 = new JButton(), b3 = new JButton(), b4 = new JButton(), b5 = new JButton(),
                 b6 = new JButton(), b7 = new JButton(), b8 = new JButton(), b9 = new JButton();
-//        Button.add(b1);
-//        Button.add(b2);
-//        Button.add(b3);
-//        Button.add(b4);
-//        Button.add(b5);
-//        Button.add(b6);
-//        Button.add(b7);
-//        Button.add(b8);
-//        Button.add(b9);
-//        f.add(b1);
-//        f.add(b2);
-//        f.add(b3);
-//        f.add(b4);
-//        f.add(b5);
-//        f.add(b6);
-//        f.add(b7);
-//        f.add(b8);
-//        f.add(b9);
+        Button.add(b1);
+        Button.add(b2);
+        Button.add(b3);
+        Button.add(b4);
+        Button.add(b5);
+        Button.add(b6);
+        Button.add(b7);
+        Button.add(b8);
+        Button.add(b9);
+
 
         f.add(b1);
         f.add(b2);
