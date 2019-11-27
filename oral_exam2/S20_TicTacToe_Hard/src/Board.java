@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Board extends JPanel {
 
     JFrame f = new JFrame("TicTacToe");
-    private ArrayList<JButton> Button = new ArrayList(9);
+    protected ArrayList<JButton> Buttons = new ArrayList(9);
     protected boolean p1turn = true;
     protected JButton PvCButton = new JButton("<html>Player<br/>vs.<br/>Computer</html>"),
             PvPButton = new JButton("<html>Player<br/>vs.<br/>Player</html>"),
@@ -17,20 +17,22 @@ public class Board extends JPanel {
     protected JTextArea textarea = new JTextArea();
 
     protected ArrayList<Player> Players = new ArrayList(2);
+    protected Player player1 = null;
+    protected Player player2 = null;
 
     public Board(){
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setLayout(new GridLayout(4,3));
 
-        Button.add(b1);
-        Button.add(b2);
-        Button.add(b3);
-        Button.add(b4);
-        Button.add(b5);
-        Button.add(b6);
-        Button.add(b7);
-        Button.add(b8);
-        Button.add(b9);
+        Buttons.add(b1);
+        Buttons.add(b2);
+        Buttons.add(b3);
+        Buttons.add(b4);
+        Buttons.add(b5);
+        Buttons.add(b6);
+        Buttons.add(b7);
+        Buttons.add(b8);
+        Buttons.add(b9);
 
         PvCHandler PvCHandler = new PvCHandler();
         PvPHandler PvPHandler = new PvPHandler();
@@ -65,6 +67,8 @@ public class Board extends JPanel {
         f.pack();
         f.setSize(450,600);
         f.setVisible(true);
+
+
     }
 
     private class PvCHandler implements ActionListener{
@@ -73,6 +77,8 @@ public class Board extends JPanel {
             PvCButton.setEnabled(false);
             PvPButton.setEnabled(false);
             CvCButton.setEnabled(false);
+            player1 = new HumanPlayer();
+            player2 = new ComputerPlayer();
         }
 
     }
@@ -83,6 +89,8 @@ public class Board extends JPanel {
             PvCButton.setEnabled(false);
             PvPButton.setEnabled(false);
             CvCButton.setEnabled(false);
+            player1 = new HumanPlayer();
+            player2 = new HumanPlayer();
         }
 
     }
@@ -93,6 +101,8 @@ public class Board extends JPanel {
             PvCButton.setEnabled(false);
             PvPButton.setEnabled(false);
             CvCButton.setEnabled(false);
+            player1 = new ComputerPlayer();
+            player2 = new ComputerPlayer();
         }
 
     }
@@ -125,8 +135,8 @@ public class Board extends JPanel {
             winners.get(i).setBackground(Color.GREEN);
         }
         if(winners.get(2) != null){
-            for(int i = 0; i < Button.size(); i++){
-                Button.get(i).setEnabled(false);
+            for(int i = 0; i < Buttons.size(); i++){
+                Buttons.get(i).setEnabled(false);
             }
             if(winners.get(2).getText().equals("X")){
                 JOptionPane.showInputDialog("Player 1 Won!");

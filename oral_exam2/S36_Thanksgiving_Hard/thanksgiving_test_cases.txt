@@ -1,0 +1,80 @@
+Test 1
+----------
+Input:
+Turkey - weight: 3, enjoyment: 4 
+Pie - weight: 2, enjoyment: 2
+Potatoes - weight: 4, enjoyment: 5
+Gravy - weight: 10, enjoyment: 10
+Stuffing - weight: 2, enjoyment: 3
+Cranberries - weight: 7, enjoyment: 5
+Casserole - weight: 12, enjoyment: 17
+Capacity = 20
+
+Output:
+Optimal enjoyment: 30
+
+
+Test 2
+----------
+Input:
+Turkey - weight: 3, enjoyment: 4
+Pie - weight: 2, enjoyment: 2
+Potatoes - weight: 4, enjoyment: 5
+Gravy - weight: 1, enjoyment: 1
+Stuffing - weight: 2, enjoyment: 3
+Cranberries - weight: 10, enjoyment: 14
+Casserole - weight: 15, enjoyment: 24
+Capacity = 41
+
+Output:
+Optimal enjoyment: 64
+
+
+Test 3
+-----------
+Input:
+Turkey - weight: 3, enjoyment: 5
+Pie - weight: 4, enjoyment: 12
+Potatoes - weight: 1, enjoyment: 1
+Gravy - weight: 2, enjoyment: 5
+Stuffing - weight: 1, enjoyment: 1
+Cranberries - weight: 2, enjoyment: 2
+Casserole - weight: 3, enjoyment: 3
+Capacity = 7
+
+Output:
+Optimal enjoyment: 18
+
+
+Test 4
+-----------
+Input:
+Turkey - weight: 3, enjoyment: 6
+Pie - weight: 4, enjoyment: 9
+Potatoes - weight: 1, enjoyment: 0.5
+Gravy - weight: 2, enjoyment: 4
+Stuffing - weight: 1, enjoyment: 1
+Cranberries - weight: 2, enjoyment: 2
+Casserole - weight: 3, enjoyment: 3
+Capacity = 9
+
+Output:
+Optimal enjoyment: 19
+
+
+Test 5
+-----------
+Input:
+Turkey - weight: 6, enjoyment: 7
+Pie - weight: 7, enjoyment: 8
+Potatoes - weight: 8, enjoyment: 9
+Gravy - weight: 9, enjoyment: 10
+Stuffing - weight: 10, enjoyment: 11
+Cranberries - weight: 11, enjoyment: 12
+Casserole - weight: 12, enjoyment: 13
+Capacity = 5
+
+Output:
+Optimal enjoyment: 0
+
+
