@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/oral_exam1/12-14_GuessNumber_Medium/12-14_GuessNumber_Medium.iml" filepath="$PROJECT_DIR$/oral_exam1/12-14_GuessNumber_Medium/12-14_GuessNumber_Medium.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oral_exam2/18-20_MazeTraversal_Hard/18-20_MazeTraversal_Hard.iml" filepath="$PROJECT_DIR$/oral_exam2/18-20_MazeTraversal_Hard/18-20_MazeTraversal_Hard.iml" />
       <module fileurl="file://$PROJECT_DIR$/quizzes/20190904_Quiz/20190904_Quiz.iml" filepath="$PROJECT_DIR$/quizzes/20190904_Quiz/20190904_Quiz.iml" />
       <module fileurl="file://$PROJECT_DIR$/quizzes/20190913-Quiz/20190913-Quiz.iml" filepath="$PROJECT_DIR$/quizzes/20190913-Quiz/20190913-Quiz.iml" />
       <module fileurl="file://$PROJECT_DIR$/quizzes/20190920-Quiz/20190920-Quiz.iml" filepath="$PROJECT_DIR$/quizzes/20190920-Quiz/20190920-Quiz.iml" />
@@ -67,7 +68,6 @@
       <module fileurl="file://$PROJECT_DIR$/textbook_examples/MVCCalculatorExamples/MVCCalculatorExamples.iml" filepath="$PROJECT_DIR$/textbook_examples/MVCCalculatorExamples/MVCCalculatorExamples.iml" />
       <module fileurl="file://$PROJECT_DIR$/oral_exam1/S10_ArabicToRomanGUI_Hard/S10_ArabicToRomanGUI_Hard.iml" filepath="$PROJECT_DIR$/oral_exam1/S10_ArabicToRomanGUI_Hard/S10_ArabicToRomanGUI_Hard.iml" />
       <module fileurl="file://$PROJECT_DIR$/oral_exam2/S20_TicTacToe_Hard/S20_TicTacToe_Hard.iml" filepath="$PROJECT_DIR$/oral_exam2/S20_TicTacToe_Hard/S20_TicTacToe_Hard.iml" />
-      <module fileurl="file://$PROJECT_DIR$/scratch/S20_TicTacToe_Hard_Test/S20_TicTacToe_Hard_.iml" filepath="$PROJECT_DIR$/scratch/S20_TicTacToe_Hard_Test/S20_TicTacToe_Hard_.iml" />
       <module fileurl="file://$PROJECT_DIR$/oral_exam1/S27_MachineLearning_Medium/S27_MachineLearning_Medium.iml" filepath="$PROJECT_DIR$/oral_exam1/S27_MachineLearning_Medium/S27_MachineLearning_Medium.iml" />
       <module fileurl="file://$PROJECT_DIR$/oral_exam1/S31_RequestInheritance_Medium/S31_RequestInheritance_Medium.iml" filepath="$PROJECT_DIR$/oral_exam1/S31_RequestInheritance_Medium/S31_RequestInheritance_Medium.iml" />
       <module fileurl="file://$PROJECT_DIR$/oral_exam2/S35_GraphAlgos_Hard/S35_GraphAlgos_Hard.iml" filepath="$PROJECT_DIR$/oral_exam2/S35_GraphAlgos_Hard/S35_GraphAlgos_Hard.iml" />
