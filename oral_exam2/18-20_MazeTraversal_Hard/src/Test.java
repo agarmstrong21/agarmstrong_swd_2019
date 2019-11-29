@@ -1,12 +1,12 @@
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 
-public class Test {
+public class Test extends Traversal{
     @org.junit.Test
     public void Test1(){
 
         char[][] test = maze1();
         print(test);
-
+        Traverse(test, 0, 2);
     }
 
     private char[][] maze1(){
@@ -36,7 +36,7 @@ public class Test {
                 = m[2][0] = m[2][2] = m[2][3]= m[2][5]= m[2][9]= m[2][11]
                 = m[3][0] = m[3][5] = m[3][6] = m[3][7] = m[3][9]= m[3][11]
                 = m[4][0] = m[4][1] = m[4][2] = m[4][3] = m[4][9]= m[4][11]
-                = m[5][0] = m[5][4] = m[5][5] = m[5][6] = m[5][9]= m[5][11]
+                = m[5][0] = m[5][4] = m[5][5] = m[5][6] =  m[5][7] = m[5][9]= m[5][11]
                 = m[6][0] = m[6][4]= m[6][11]
                 = m[7][0] = m[7][2] = m[7][4] = m[7][5] = m[7][6] = m[7][7] = m[7][9] = m[7][10]= m[7][11]
                 = m[8][0] = m[8][2] = m[8][9]= m[8][11]
@@ -50,11 +50,12 @@ public class Test {
 
 
     public void print(char[][] test){
-        for(int i =0; i < 12; i++){
-            for(int j = 0; j <  12; j++){
-                System.out.print(test[j][i]+" ");
+        for(int y =0; y < 12; y++){
+            for(int x = 0; x <  12; x++){
+                System.out.print(test[x][y]+" ");
             }
             System.out.println();
         }
+        System.out.println();
     }
 }
