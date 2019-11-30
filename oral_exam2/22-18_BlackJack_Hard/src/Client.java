@@ -1,6 +1,3 @@
-// Fig. 28.9: Client.java
-// Client side of connectionless client/server computing with datagrams.
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -28,8 +25,6 @@ public class Client extends JFrame {
                         {
                             // get message from textfield
                             String message = event.getActionCommand();
-//                            displayArea.append("\nSending packet containing: " +
-//                                    message + "\n");
 
                             byte[] data = message.getBytes(); // convert to bytes
 
@@ -77,14 +72,6 @@ public class Client extends JFrame {
 
                 socket.receive(receivePacket); // wait for packet
 
-                // display packet contents
-//                displayMessage("\nPacket received:" +
-//                        "\nFrom host: " + receivePacket.getAddress() +
-//                        "\nHost port: " + receivePacket.getPort() +
-//                        "\nLength: " + receivePacket.getLength() +
-//                        "\nContaining:\n\t" + new String(receivePacket.getData(),
-//                        0, receivePacket.getLength()));
-
                 displayMessage("\nPlayer: " + new String(receivePacket.getData(), 0, receivePacket.getLength()));
             } catch (IOException exception) {
                 displayMessage(exception + "\n");
@@ -106,18 +93,3 @@ public class Client extends JFrame {
     }
 }
 
-
-/**************************************************************************
- * (C) Copyright 1992-2014 by Deitel & Associates, Inc. and               *
- * Pearson Education, Inc. All Rights Reserved.                           *
- *                                                                        *
- * DISCLAIMER: The authors and publisher of this book have used their     *
- * best efforts in preparing the book. These efforts include the          *
- * development, research, and testing of the theories and programs        *
- * to determine their effectiveness. The authors and publisher make       *
- * no warranty of any kind, expressed or implied, with regard to these    *
- * programs or to the documentation contained in these books. The authors *
- * and publisher shall not be liable in any event for incidental or       *
- * consequential damages in connection with, or arising out of, the       *
- * furnishing, performance, or use of these programs.                     *
- *************************************************************************/

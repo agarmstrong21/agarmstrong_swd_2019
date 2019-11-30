@@ -20,7 +20,7 @@ public class Server extends JFrame {
         setSize(400, 300); // set size of window
         setVisible(true); // show window
 
-        try // create DatagramSocket for sending and receiving packets
+        try
         {
             socket = new DatagramSocket(5000);
         } catch (SocketException socketException) {
@@ -102,7 +102,7 @@ public class Server extends JFrame {
         WhoWins(Player1, Player2);
     }
 
-    // wait for packets to arrive, display data and echo packet to client
+    // wait for packets to arrive, display data
     public String waitForPackets() {
         boolean temp = true;
         String out = "";
@@ -114,14 +114,6 @@ public class Server extends JFrame {
                         new DatagramPacket(data, data.length);
 
                 socket.receive(receivePacket); // wait to receive packet
-
-                // display information from received packet
-//                displayMessage("\nPacket received:" +
-//                        "\nFrom host: " + receivePacket.getAddress() +
-//                        "\nHost port: " + receivePacket.getPort() +
-//                        "\nLength: " + receivePacket.getLength() +
-//                        "\nContaining:\n\t" + new String(receivePacket.getData(),
-//                        0, receivePacket.getLength()));
 
                 out = new String(receivePacket.getData(), 0, receivePacket.getLength());
                 displayMessage("\nPlayer: " + out + "\n");
@@ -138,18 +130,14 @@ public class Server extends JFrame {
         return out;
     }
 
-    // echo packet to client
     private void sendPacketToClient(DatagramPacket receivePacket)
             throws IOException {
-        //displayMessage("\n\nEcho data to client...");
-
         // create packet to send
         DatagramPacket sendPacket = new DatagramPacket(
                 receivePacket.getData(), receivePacket.getLength(),
                 receivePacket.getAddress(), receivePacket.getPort());
 
         socket.send(sendPacket); // send packet to client
-        //displayMessage("Packet sent\n");
     }
 
     // manipulates displayArea in the event-dispatch thread
