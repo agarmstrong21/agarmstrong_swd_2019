@@ -101,10 +101,13 @@ public class Server extends JFrame {
         // Displays total
         displayMessage(Card.printDeck(Dealer) + "Total: " + DealerTotal + "\n\n");
 
-        // While loop if both parties want to draw. It will break if both parties do not want to continue or if totals reach 21
+        // While loop if both parties want to draw. It will break if both parties do not want to continue
+            // or if totals reach 21
         while(p1||p2) {
             displayMessage("Player would you like to draw? Type y for yes or n for no.");
             String p1String = waitForPackets();
+
+            // If player wants to deal then it will give them a new card
             if (p1String.equals("y")) {
                 p1 = true;
                 displayMessage("Player, Here are your cards:\n");
@@ -118,6 +121,7 @@ public class Server extends JFrame {
                 displayMessage("Player decides to stay.\n");
             }
 
+            // If dealer wants to deal then it will give them a new card
             if(DealerTotal < 21){
                 p2 = true;
                 displayMessage("Dealer, Here are your cards:\n");
@@ -131,11 +135,14 @@ public class Server extends JFrame {
                 displayMessage("Dealer decides to stay.\n");
             }
 
+            // If either totals are over 20, then it will break the loop
             if(PlayerTotal > 20 || DealerTotal > 20){
                 p1 = false;
                 p2 = false;
             }
         }
+
+        // Runs the WhoWins Method to print out who won
         WhoWins(Player, Dealer);
     }
 
@@ -144,7 +151,8 @@ public class Server extends JFrame {
         boolean temp = true;
         String out = "";
         while (temp) {
-            try // receive packet, display contents, return copy to client
+            // receive packet, display contents, return copy to client
+            try
             {
                 byte[] data = new byte[100]; // set up packet
                 DatagramPacket receivePacket =
@@ -189,34 +197,53 @@ public class Server extends JFrame {
         );
     }
 
+    // Gets total of given deck
     public int CardTotal(ArrayList<Card> p){
         int total = 0;
-        for(int i = 0; i < p.size(); i++){
-            total += p.get(i).number;
+        for (Card card : p) {
+            total += card.number;
         }
         return total;
     }
 
+    // Displays who won depending on total
     public void WhoWins(ArrayList<Card> Player, ArrayList<Card> Dealer){
+        // Prints out totals of both parties
         displayMessage("Here are the ending results:\n Player has: \n" + Card.printDeck(Player));
-        displayMessage("\nDealer two has: \n" + Card.printDeck(Dealer));
+        displayMessage("\nDealer has: \n" + Card.printDeck(Dealer));
         int p1 = CardTotal(Player);
         int p2 = CardTotal(Dealer);
+
+        // Compares the totals
+        // If both are equal, ends in tie
         if(p1 == p2){
             displayMessage("\nPlayer and Dealer tie with " + p1);
-        } else if(p1 > p2 ){
+        }
+
+        // If player has a higher total then...
+        else if(p1 > p2 ){
+            // If player's total is less than 22, then they win
             if(p1 < 22){
                 displayMessage("\nPlayer Wins! With " + p1 + " over Dealer's " + p2);
-            }else if(p2 < 22){
+            }
+            // If player's total is greater than 22, then dealer wins
+            else if(p2 < 22){
                 displayMessage("\nDealer Wins! With " + p2 + " over Player's " + p1);
             }
-        }else if(p2 > p1 && p2 < 22){
+        }
+        // If Dealer has a higher total then...
+        else if(p2 > p1){
+            // If Dealer's total is less than 22, then they win
             if(p2 < 22){
                 displayMessage("\nDealer Wins! With " + p2 + " over Player's " + p1);
-            }else if(p1 < 22){
+            }
+            // If Dealer's total is greater than 22, then player wins
+            else if(p1 < 22){
                 displayMessage("\nPlayer Wins! With " + p1 + " over Dealer's " + p2);
             }
-        }else{
+        }
+        // If none of the statements worked, no one won.
+        else{
             displayMessage("\nNo one won.");
         }
     }
