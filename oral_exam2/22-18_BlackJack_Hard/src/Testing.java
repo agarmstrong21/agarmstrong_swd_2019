@@ -64,10 +64,40 @@ public class Testing  {
             } else {
                 p2 = false;
             }
-
-
         }
 
-        //Card.WhoWins(Player1, Player2);
+        WhoWins(Player1, Player2);
+    }
+
+    public static void WhoWins(ArrayList<Card> Player1, ArrayList<Card> Player2){
+        System.out.print("Here are the ending results:\n Player has: \n" + Card.printDeck(Player1));
+        System.out.print("\nDealer two has: \n" + Card.printDeck(Player2));
+        int p1 = CardTotal(Player1);
+        int p2 = CardTotal(Player2);
+        if(p1 == p2){
+            System.out.print("\nPlayer and Dealer tie with " + p1);
+        } else if(p1 > p2 ){
+            if(p1 < 22){
+                System.out.print("\nPlayer Wins! With " + p1 + " over Dealer's " + p2);
+            }else if(p2 < 22){
+                System.out.print("\nDealer Wins! With " + p2 + " over Player's " + p1);
+            }
+        }else if(p2 > p1 && p2 < 22){
+            if(p2 < 22){
+                System.out.print("\nDealer Wins! With " + p2 + " over Player's " + p1);
+            }else if(p1 < 22){
+                System.out.print("\nPlayer Wins! With " + p1 + " over Dealer's " + p2);
+            }
+        }else{
+            System.out.print("\nNo one won.");
+        }
+    }
+
+    public static int CardTotal(ArrayList<Card> p){
+        int total = 0;
+        for(int i = 0; i < p.size(); i++){
+            total += p.get(i).number;
+        }
+        return total;
     }
 }

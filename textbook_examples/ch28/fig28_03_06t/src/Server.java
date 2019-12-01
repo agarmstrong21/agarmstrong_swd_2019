@@ -159,6 +159,14 @@ public class Server extends JFrame {
                 }
         );
     }
+
+    public class User implements Runnable {
+
+
+        public void run() {
+
+        }
+    }
 }
 
 /**************************************************************************
