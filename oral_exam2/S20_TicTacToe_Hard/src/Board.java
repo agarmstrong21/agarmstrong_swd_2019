@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Board extends JPanel {
 
     JFrame f = new JFrame("TicTacToe");
+
     protected ArrayList<JButton> Buttons = new ArrayList(9);
     protected boolean p1turn = true;
     protected JButton PvCButton = new JButton("<html>Player<br/>vs.<br/>Computer</html>"),
