@@ -1,19 +1,23 @@
-public abstract class Player extends Board{
-    public Player(){
-    }
+/*
+Name: Addison Armstrong
+Name of Project: S20_TicTacToe_Hard
+Name of Class: Player
+Class Description: Abstract class Player which takes in Computer and Human.
+*/
 
-    public void start(){
-        while(!isFull());
-        //player1.play();
-        //player2.play();
-    }
+/**
+ * Abstract class Player which takes in Computer and Human.
+ */
+public abstract class Player {
 
-    private boolean isFull(){
-        for(int i = 0; i < Buttons.size(); i++){
-            if(Buttons.get(i).getText().contains("")){
-                return false;
-            }
+    // validMove method which checks the move and see if it empty in the char array
+    public boolean validMove(char[] board, int move){
+        if(board[move] == ' '){
+            return true;
         }
-        return true;
+        return false;
     }
+
+    // middle man of the play method
+    public abstract int play(char[] board);
 }

@@ -1,152 +1,123 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
+/*
+Name: Addison Armstrong
+Name of Project: S20_TicTacToe_Hard
+Name of Class: Board
+Class Description: This is the Board class which holds the board and specific methods.
+*/
 
-public class Board extends JPanel {
+import java.util.Arrays;
+import java.util.Scanner;
 
-    JFrame f = new JFrame("TicTacToe");
+/**
+ * This is the Board class which holds the board and specific methods.
+ */
+public class Board {
+    // Creating the board
+    private char[] board = new char[9];
 
-    protected ArrayList<JButton> Buttons = new ArrayList(9);
-    protected boolean p1turn = true;
-    protected JButton PvCButton = new JButton("<html>Player<br/>vs.<br/>Computer</html>"),
-            PvPButton = new JButton("<html>Player<br/>vs.<br/>Player</html>"),
-            CvCButton = new JButton("<html>Computer<br/>vs.<br/>Computer</html>");
-    protected JButton b1 = new JButton(), b2 = new JButton(), b3 = new JButton(), b4 = new JButton(), b5 = new JButton(),
-            b6 = new JButton(), b7 = new JButton(), b8 = new JButton(), b9 = new JButton();
-    protected JTextArea textarea = new JTextArea();
-
-    protected ArrayList<Player> Players = new ArrayList(2);
-    protected Player player1 = null;
-    protected Player player2 = null;
-
+    // Board Constructor
     public Board(){
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setLayout(new GridLayout(4,3));
+        // Creating players
+        Player Player1 = new Computer();
+        Player Player2 = new Computer();
 
-        Buttons.add(b1);
-        Buttons.add(b2);
-        Buttons.add(b3);
-        Buttons.add(b4);
-        Buttons.add(b5);
-        Buttons.add(b6);
-        Buttons.add(b7);
-        Buttons.add(b8);
-        Buttons.add(b9);
+        //Creating scanner tool
+        Scanner readIn = new Scanner(System.in);
 
-        PvCHandler PvCHandler = new PvCHandler();
-        PvPHandler PvPHandler = new PvPHandler();
-        CvCHandler CvCHandler = new CvCHandler();
-        PvCButton.addActionListener(PvCHandler);
-        PvPButton.addActionListener(PvPHandler);
-        CvCButton.addActionListener(CvCHandler);
+        // Filling the board with space
+        Arrays.fill(board, ' ');
 
-        ButtonHandler ButtonHandler = new ButtonHandler();
-        b1.addActionListener(ButtonHandler);
-        b2.addActionListener(ButtonHandler);
-        b3.addActionListener(ButtonHandler);
-        b4.addActionListener(ButtonHandler);
-        b5.addActionListener(ButtonHandler);
-        b6.addActionListener(ButtonHandler);
-        b7.addActionListener(ButtonHandler);
-        b8.addActionListener(ButtonHandler);
-        b9.addActionListener(ButtonHandler);
+        System.out.println("Please input number of human players.\n0 for CvC\n1 for PvC\n2 for PvP");
 
-        f.add(PvCButton);
-        f.add(PvPButton);
-        f.add(CvCButton);
-        f.add(b1);
-        f.add(b2);
-        f.add(b3);
-        f.add(b4);
-        f.add(b5);
-        f.add(b6);
-        f.add(b7);
-        f.add(b8);
-        f.add(b9);
-        f.pack();
-        f.setSize(450,600);
-        f.setVisible(true);
-
-
-    }
-
-    private class PvCHandler implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent event){
-            PvCButton.setEnabled(false);
-            PvPButton.setEnabled(false);
-            CvCButton.setEnabled(false);
-            player1 = new HumanPlayer();
-            player2 = new ComputerPlayer();
-        }
-
-    }
-
-    private class PvPHandler implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent event){
-            PvCButton.setEnabled(false);
-            PvPButton.setEnabled(false);
-            CvCButton.setEnabled(false);
-            player1 = new HumanPlayer();
-            player2 = new HumanPlayer();
-        }
-
-    }
-
-    private class CvCHandler implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent event){
-            PvCButton.setEnabled(false);
-            PvPButton.setEnabled(false);
-            CvCButton.setEnabled(false);
-            player1 = new ComputerPlayer();
-            player2 = new ComputerPlayer();
-        }
-
-    }
-
-    private class ButtonHandler implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent event){
-            JButton temp = (JButton) event.getSource();
-            if(p1turn){
-                temp.setText("X");
-                temp.setEnabled(false);
-                p1turn = false;
+        // Try catching the input to make sure it is valid for how many players
+        try{
+            int numPlayer = Integer.parseInt(readIn.next());
+            if(numPlayer == 0){
+                Player1 = new Computer();
+                Player2 = new Computer();
+            }else if(numPlayer == 1){
+                Player1 = new Human();
+                Player2 = new Computer();
+            }else if(numPlayer == 2){
+                Player1 = new Human();
+                Player2 = new Human();
             }else{
-                temp.setText("0");
-                temp.setEnabled(false);
-                p1turn = true;
+                System.out.println("You didn't enter a right one.");
+                System.exit(1);
             }
-            win();
+        }catch(Exception e){
+            System.out.println("You didn't enter a right one.");
+            System.exit(1);
         }
+
+        // Prints Board
+        print();
+        // While board is not full, play the players
+        while(!BoardFull()){
+            int play1 = Player1.play(board);
+            board[play1] = 'X';
+            print();
+            if(!BoardFull()) {
+                int play2 = Player2.play(board);
+                board[play2] = 'O';
+                print();
+            }
+        }
+        win();
     }
 
-    private void win(){
-        ArrayList<JButton> winners = new ArrayList<>(3);
-        if(b1.getText().equals(b2.getText()) && b2.getText().equals(b3.getText())){
-            winners.add(b1);
-            winners.add(b2);
-            winners.add(b3);
-        }
-        for(int i = 0; i < 3; i ++){
-            winners.get(i).setBackground(Color.GREEN);
-        }
-        if(winners.get(2) != null){
-            for(int i = 0; i < Buttons.size(); i++){
-                Buttons.get(i).setEnabled(false);
+    /**
+     * BoardFull method to check if the board is full
+     * @return
+     */
+    public boolean BoardFull(){
+        for(int i = 0; i < board.length; i++){
+            if(board[i] == ' '){
+                return false;
             }
-            if(winners.get(2).getText().equals("X")){
-                JOptionPane.showInputDialog("Player 1 Won!");
-            }else{
-                JOptionPane.showInputDialog("Player 2 Won!");
-            }
+        }
+        return true;
+    }
 
+    /**
+     * Prints board in specific way
+     */
+    private void print(){
+        System.out.println(board[0] + " | " + board[1] + " | " + board[2]);
+        System.out.println("---------");
+        System.out.println(board[3] + " | " + board[4] + " | " + board[5]);
+        System.out.println("---------");
+        System.out.println(board[6] + " | " + board[7] + " | " + board[8]);
+        System.out.println();
+    }
+
+    /**
+     * Checks board to see who won via the tictactoe rules
+     */
+    public void win(){
+        if((board[0] == board[1] && board[1] == board[2] && board[0] == 'X') ||
+                (board[3] == board[4] && board[4] == board[5] && board[3] == 'X') ||
+                (board[6] == board[7] && board[7] == board[8] && board[6] == 'X') ||
+                (board[0] == board[3] && board[3] == board[6] && board[0] == 'X') ||
+                (board[1] == board[4] && board[4] == board[7] && board[1] == 'X') ||
+                (board[2] == board[5] && board[5] == board[8] && board[2] == 'X') ||
+                (board[0] == board[4] && board[4] == board[8] && board[0] == 'X') ||
+                (board[2] == board[4] && board[4] == board[6] && board[2] == 'X')) {
+            System.out.println("Player 1 Wins!");
+        }
+        else if((board[0] == board[1] && board[1] == board[2] && board[0] == 'O') ||
+                (board[3] == board[4] && board[4] == board[5] && board[3] == 'O') ||
+                (board[6] == board[7] && board[7] == board[8] && board[6] == 'O') ||
+                (board[0] == board[3] && board[3] == board[6] && board[0] == 'O') ||
+                (board[1] == board[4] && board[4] == board[7] && board[1] == 'O') ||
+                (board[2] == board[5] && board[5] == board[8] && board[2] == 'O') ||
+                (board[0] == board[4] && board[4] == board[8] && board[0] == 'O') ||
+                (board[2] == board[4] && board[4] == board[6] && board[2] == 'O')){
+            System.out.println("Player 2 Wins!");
+        }
+        else{
+            System.out.println("No one won!");
         }
 
     }
-
 }
