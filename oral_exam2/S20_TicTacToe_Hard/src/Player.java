@@ -1,11 +1,11 @@
-public class Player extends Board{
+public abstract class Player extends Board{
     public Player(){
     }
 
     public void start(){
-        while(!isFull())
-        player1.play();
-        player2.play();
+        while(!isFull());
+        //player1.play();
+        //player2.play();
     }
 
     private boolean isFull(){

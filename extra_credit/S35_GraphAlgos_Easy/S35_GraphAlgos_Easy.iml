@@ -2,8 +2,8 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$/../oral_exam1/S4_ChangeComputation_Medium">
-      <sourceFolder url="file://$MODULE_DIR$/../oral_exam1/S4_ChangeComputation_Medium/src" isTestSource="false" />
+    <content url="file://$MODULE_DIR$/../../extra_credit/S35_GraphAlgos_Easy">
+      <sourceFolder url="file://$MODULE_DIR$/../../extra_credit/S35_GraphAlgos_Easy/src" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

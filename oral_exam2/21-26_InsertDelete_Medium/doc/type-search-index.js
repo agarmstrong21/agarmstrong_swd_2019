@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"com.deitel.datastructurs","l":"EmptyListException"},{"p":"com.deitel.datastructurs","l":"List"},{"p":"com.deitel.datastructurs","l":"ListNode"},{"p":"<Unnamed>","l":"ListTest"}]
