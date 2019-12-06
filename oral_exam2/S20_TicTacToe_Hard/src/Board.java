@@ -5,6 +5,7 @@ Name of Class: Board
 Class Description: This is the Board class which holds the board and specific methods.
 */
 
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -62,8 +63,9 @@ public class Board {
                 board[play2] = 'O';
                 print();
             }
+            win();
         }
-        win();
+        //win();
     }
 
     /**
@@ -116,8 +118,7 @@ public class Board {
             System.out.println("Player 2 Wins!");
         }
         else{
-            System.out.println("No one won!");
+            System.out.println();
         }
-
     }
 }
